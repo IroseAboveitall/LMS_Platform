@@ -4,8 +4,8 @@ import { SidebarRoutes } from "@/app/(dashboard)/_components/sidebar-routes";
 const Sidebar = () => {
   return (
     // 👇 Dark background
-    // <div className="h-full border-r bg-[#100133] text-white shadow-[0px_20px_20px_10px_#00000024]">
-    <div className="h-full border-r shadow-[0px_0px_17px_5px_#00000024]">
+    <div className="h-full bg-[#94157b] bg-opacity-40 text-white">
+      {/* <div className="h-full border-r shadow-[0px_0px_17px_5px_#00000024]"> */}
       {/* 👇 Logo Container 👇*/}
       <div className="p-6">
         <Logo />

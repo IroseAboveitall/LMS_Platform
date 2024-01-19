@@ -34,7 +34,8 @@ export const SidebarItem = ({ icon: Icon, label, href }: SidebarItemProps) => {
       className={cn(
         "ml-4 flex items-center gap-x-2 text-slate-500 text-sm font-[500] pl-6 transition-all hover:text-slate-600 hover:bg-slate-300/20",
         isActive &&
-          "active rounded-tl-lg rounded-bl-lg text-[#190359] bg-[#94157b] bg-opacity-40 hover:bg-[#94157b] hover:bg-opacity-40 hover:text-[#190359]"
+          // "active rounded-tl-lg rounded-bl-lg text-[#190359] bg-[#94157b] bg-opacity-40 hover:bg-[#94157b] hover:bg-opacity-40 hover:text-[#190359]"
+          "active rounded-tl-lg rounded-bl-lg text-[#190359] bg-white hover:bg-white hover:text-[#190359]"
       )}
     >
       <b></b>
