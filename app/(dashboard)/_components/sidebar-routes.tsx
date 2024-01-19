@@ -2,7 +2,7 @@
 
 import { SidebarItem } from "@/app/(dashboard)/_components/sidebar-item";
 
-import { Compass, Layout, Home, FileSearch2 } from "lucide-react";
+import { Home, FileSearch2 } from "lucide-react";
 
 const guestRoutes = [
   {
