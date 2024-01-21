@@ -38,13 +38,13 @@ export const SidebarItem = ({ icon: Icon, label, href }: SidebarItemProps) => {
       <b
         className={cn(
           "z-10 pointer-events-none absolute top-[-20px] h-[20px] w-full right-0 bg-white hidden before:content-[''] before:absolute before:top-0 before:left-0 before:w-full before:h-full before:bg-[#0c0f2e] before:rounded-br-[20px]",
-          isActive && "block"
+          isActive && "md:block"
         )}
       ></b>
       <b
         className={cn(
           "z-10 pointer-events-none absolute bottom-[-20px] right-0 h-[20px] w-full bg-white hidden before:content-[''] before:absolute before:top-0 before:left-0 before:w-full before:h-full before:bg-[#0c0f2e] before:rounded-tr-[20px]",
-          isActive && "block"
+          isActive && "md:block"
         )}
       ></b>
       <div className="z-40 pointer-events-none flex items-center gap-x-2 py-4">
