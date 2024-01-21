@@ -9,7 +9,7 @@ export const NavbarRoutes = () => {
   const pathname = usePathname();
   const router = useRouter();
 
-  const isInstructorPage = pathname?.startsWith("/teacher");
+  const isInstructorPage = pathname?.startsWith("/instructor");
   const isLearnerPage = pathname?.includes("/chapter");
 
   return (
