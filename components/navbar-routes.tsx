@@ -15,7 +15,10 @@ export const NavbarRoutes = () => {
     <div className="flex gap-x-2 ml-auto">
       {isInstructorPage || isLearnerPage ? (
         <Link href="/">
-          <Button className="mr-5 bg-[#11555b] hover:text-[#67eaf7] hover:bg-[#11555b]">
+          <Button
+            size="sm"
+            className="mr-5 bg-[#11555b] hover:text-[#67eaf7] hover:bg-[#11555b]"
+          >
             <LogOut className="h-4 w-4 mr-2" />
             Leave
           </Button>
