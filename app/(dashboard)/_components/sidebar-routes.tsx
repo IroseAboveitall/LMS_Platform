@@ -34,10 +34,10 @@ const instructorRoutes = [
 export const SidebarRoutes = () => {
   const pathname = usePathname();
 
-  const isInstructorePage = pathname?.includes("/instructor");
+  const isInstructorPage = pathname?.includes("/instructor");
 
   // 👇 This is going to be dynamic
-  const routes = isInstructorePage ? instructorRoutes : guestRoutes;
+  const routes = isInstructorPage ? instructorRoutes : guestRoutes;
 
   return (
     <div className="flex flex-col w-full">
