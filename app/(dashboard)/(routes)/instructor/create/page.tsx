@@ -19,6 +19,7 @@ import {
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import Link from "next/link";
 
 // We could create this Schema in a file inside a folder schemas, so that it could be accessible from everywhere.
 const formSchema = z.object({
@@ -40,8 +41,11 @@ const CreateCoursePage = () => {
   const { isSubmitting, isValid } = form.formState;
 
   // Write an onSubmit function
-  const onSubmit = (data: z.infer<typeof formSchema>) => {
-    console.log(data);
+  // const onSubmit = (data: z.infer<typeof formSchema>) => {
+  //   console.log(data);
+  // };
+  const onSubmit = (values: z.infer<typeof formSchema>) => {
+    console.log(values);
   };
 
   return (
@@ -52,6 +56,52 @@ const CreateCoursePage = () => {
           Designate a Title for Your Course. Don't worry you can change this
           later.
         </p>
+
+        <Form {...form}>
+          <form
+            onSubmit={form.handleSubmit(onSubmit)}
+            className="space-y-8 mt-8"
+          >
+            <FormField
+              control={form.control}
+              name="title"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Course Title</FormLabel>
+                  <FormControl>
+                    <Input
+                      disabled={isSubmitting}
+                      placeholder="e.g. C++ for Beginners"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormDescription>
+                    What will you Instruct in this Course?
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <div className="flex items-center gap-x-2">
+              <Link href="/">
+                <Button
+                  type="button"
+                  variant="ghost"
+                  className=" hover:bg-[#234661] hover:text-white"
+                >
+                  Cancel
+                </Button>
+              </Link>
+              <Button
+                  className="bg-[#182B48] hover:bg-[#234661]"
+                  disabled={!isValid || isSubmitting}
+                  type="submit"
+                >
+                  Continue
+              </Button>
+            </div>
+          </form>
+        </Form>
       </div>
     </div>
   );
