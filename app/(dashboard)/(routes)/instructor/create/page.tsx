@@ -40,12 +40,21 @@ const CreateCoursePage = () => {
   const { isSubmitting, isValid } = form.formState;
 
   // Write an onSubmit function
-  const onSubmit =  (data: z.infer<typeof formSchema>) => {
+  const onSubmit = (data: z.infer<typeof formSchema>) => {
     console.log(data);
   };
 
-  return (<div>Create a Course</div>);
-  
-}
+  return (
+    <div className="max-w-5xl mx-auto flex md:items-center md:justify-center h-full p-6">
+      <div>
+        <h1 className="text-2xl">Provide a course name</h1>
+        <p className="text-sm text-slate-600">
+          Designate a Title for Your Course. Don't worry you can change this
+          later.
+        </p>
+      </div>
+    </div>
+  );
+};
 
 export default CreateCoursePage;
