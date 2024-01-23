@@ -28,7 +28,24 @@ const formSchema = z.object({
 });
 
 const CreateCoursePage = () => {
-  return <div>Create a Course</div>;
-};
+  // Define the form
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      title: "",
+    },
+  });
+
+  // Extract the states from the form
+  const { isSubmitting, isValid } = form.formState;
+
+  // Write an onSubmit function
+  const onSubmit =  (data: z.infer<typeof formSchema>) => {
+    console.log(data);
+  };
+
+  return (<div>Create a Course</div>);
+  
+}
 
 export default CreateCoursePage;
