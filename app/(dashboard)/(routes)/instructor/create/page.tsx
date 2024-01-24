@@ -87,17 +87,17 @@ const CreateCoursePage = () => {
                 <Button
                   type="button"
                   variant="ghost"
-                  className=" hover:bg-[#234661] hover:text-white"
+                  className="hover:bg-[#ff7d8e] hover:text-white"
                 >
                   Cancel
                 </Button>
               </Link>
               <Button
-                  className="bg-[#182B48] hover:bg-[#234661]"
-                  disabled={!isValid || isSubmitting}
-                  type="submit"
-                >
-                  Continue
+                className="bg-[#182B48] hover:bg-[#234661]"
+                disabled={!isValid || isSubmitting}
+                type="submit"
+              >
+                Continue
               </Button>
             </div>
           </form>
