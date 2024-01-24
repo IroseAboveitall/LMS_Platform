@@ -29,6 +29,7 @@ const formSchema = z.object({
 });
 
 const CreateCoursePage = () => {
+  const router = useRouter();
   // Define the form
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -44,8 +45,13 @@ const CreateCoursePage = () => {
   // const onSubmit = (data: z.infer<typeof formSchema>) => {
   //   console.log(data);
   // };
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
-    console.log(values);
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    try {
+      const response = await axios.post("/api/course", values);
+      router.push(`/instructor/courses/${response.data.id}`);
+    } catch {
+      console.log("Something went wrong!");
+    }
   };
 
   return (
