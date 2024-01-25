@@ -1,7 +1,9 @@
-const CourseIdPage = () => {
+const CourseIdPage = ({params}: {
+    params: { courseId: string}
+}) => {
     return (
         <div>
-            Course ID Page
+            Course ID Page for id : {params.courseId}
         </div>
     );
 }
