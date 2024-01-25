@@ -1,10 +1,11 @@
-// export default function Home() {
-//   return <div>Home Page or Dashboard</div>;
-// }
-// 👆 Above was present from the starter code of NextJS
+import { UserButton } from "@clerk/nextjs";
 
 const Home = () => {
-  return <div>Home Page or Dashboard</div>;
+  return (
+    <div>
+      <UserButton afterSignOutUrl="/" />
+    </div>
+  );
 };
 
 export default Home;
