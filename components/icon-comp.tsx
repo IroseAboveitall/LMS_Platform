@@ -44,3 +44,18 @@ const iconVariants = cva("", {
     size: "default",
   },
 });
+
+type BackgroundVariantsProps = VariantProps<typeof backgroundVariants>;
+type IconVariantsProps = VariantProps<typeof iconVariants>;
+
+interface IconCompProps extends BackgroundVariantsProps, IconVariantsProps {
+  icon: LucideIcon;
+}
+
+export const IconComp = ({ icon: Icon, variant, size }: IconCompProps) => {
+  return (
+    <div className={cn(backgroundVariants({ variant, size }))}>
+      <Icon className={cn(iconVariants({ variant, size }))} />
+    </div>
+  );
+};
