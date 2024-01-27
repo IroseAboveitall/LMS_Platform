@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { useState } from "react";
 
 interface TitleFormProps {
   initialData: {
@@ -30,6 +31,10 @@ const formSchema = z.object({
 });
 
 export const TitleForm = ({ initialData, courseId }: TitleFormProps) => {
+  const [isEditing, setIsEditing] = useState(false);
+
+  const toggleEdit = () => setIsEditing((current) => !current);
+
   // Initialize the useForm
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -49,11 +54,26 @@ export const TitleForm = ({ initialData, courseId }: TitleFormProps) => {
       <div className="font-medium flex items-center justify-between">
         Course title
         <Button
+          onClick={toggleEdit}
           variant="ghost"
           className="hover:bg-slate-300 flex justify-center mr-2"
         >
-          <Pencil className="h-4 w-4 mr-2" />
-          Edit Title
+          {/* {isEditing && <>Cancel</>}
+          {!isEditing && (
+            <>
+              <Pencil className="h-4 w-4 mr-2" />
+              Edit Title
+            </>
+          )} */}
+          {/* 👇 Using Ternary operator instead ( This is just another way of conditional rendering ) */}
+          {isEditing ? (
+            <>Cancel</>
+          ) : (
+            <>
+              <Pencil className="h-4 w-4 mr-2" />
+              Edit Title
+            </>
+          )}
         </Button>
       </div>
     </div>
