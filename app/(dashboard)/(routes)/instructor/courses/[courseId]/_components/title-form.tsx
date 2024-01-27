@@ -35,5 +35,8 @@ export const TitleForm = ({ initialData, courseId }: TitleFormProps) => {
     defaultValues: initialData,
   });
 
+  // Extract the states from the useForm hook
+  const { isSubmitting, isValid } = form.formState;
+
   return <div> Title Form</div>;
 };
