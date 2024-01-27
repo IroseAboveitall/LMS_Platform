@@ -35,8 +35,13 @@ export const TitleForm = ({ initialData, courseId }: TitleFormProps) => {
     defaultValues: initialData,
   });
 
-  // Extract the states from the useForm hook
+  // Extract the states from the useForm hook instance
   const { isSubmitting, isValid } = form.formState;
+
+  // Create the onSubmit function handler to call the API to submit the inputs.
+  const onSubmit = async (data: z.infer<typeof formSchema>) => {
+    console.log(data);
+  };
 
   return <div> Title Form</div>;
 };
