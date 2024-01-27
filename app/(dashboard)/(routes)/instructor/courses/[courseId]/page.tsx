@@ -7,12 +7,16 @@ import { redirect } from "next/navigation";
 const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
   const { userId } = auth();
 
+  //  👇 If the user is NOT logged in and the user enters the URL corresponding to a course, redirect them back to the Home Page.
+
   // Check if userId is present or not i.e. if the user is logged in or not
   if (!userId) {
     return redirect("/"); // Redirect back to the Root Page i.e. the Home Page
   }
 
-  // Fetch the course
+  //  👇 If the user is logged in but course was deleted earlier and now the user enters the URL corresponding to the that deleted course, redirect back to the Home Page ( After checking that no course exists in the DB )
+
+  // Fetch the course 
   const course = await db.course.findUnique({
     where: { id: params.courseId },
   });
