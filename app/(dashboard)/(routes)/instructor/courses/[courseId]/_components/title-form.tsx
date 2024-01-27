@@ -4,6 +4,7 @@ import * as z from "zod";
 import axios from "axios";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { Pencil } from "lucide-react";
 
 import {
   Form,
@@ -43,5 +44,18 @@ export const TitleForm = ({ initialData, courseId }: TitleFormProps) => {
     console.log(data);
   };
 
-  return <div> Title Form</div>;
+  return (
+    <div className="mt-6 border bg-slate-100 rounded-md p-4">
+      <div className="font-medium flex items-center justify-between">
+        Course title
+        <Button
+          variant="ghost"
+          className="hover:bg-slate-300 flex justify-center mr-2"
+        >
+          <Pencil className="h-4 w-4 mr-2" />
+          Edit Title
+        </Button>
+      </div>
+    </div>
+  );
 };
