@@ -29,5 +29,11 @@ const formSchema = z.object({
 });
 
 export const TitleForm = ({ initialData, courseId }: TitleFormProps) => {
+  // Initialize the useForm
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: initialData,
+  });
+
   return <div> Title Form</div>;
 };
