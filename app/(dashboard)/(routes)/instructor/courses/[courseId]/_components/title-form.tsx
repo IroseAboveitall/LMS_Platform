@@ -22,6 +22,12 @@ interface TitleFormProps {
   courseId: string;
 }
 
+const formSchema = z.object({
+  title: z.string().min(1, {
+    message: "Title cannot be empty",
+  }),
+});
+
 export const TitleForm = ({ initialData, courseId }: TitleFormProps) => {
   return <div> Title Form</div>;
 };
