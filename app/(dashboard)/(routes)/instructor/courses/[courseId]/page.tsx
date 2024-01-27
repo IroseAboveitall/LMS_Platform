@@ -1,3 +1,4 @@
+import { TitleForm } from "@/app/(dashboard)/(routes)/instructor/courses/[courseId]/_components/title-form";
 import { IconComp } from "@/components/icon-comp";
 import { db } from "@/lib/db";
 import { auth } from "@clerk/nextjs";
@@ -16,7 +17,7 @@ const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
 
   //  👇 If the user is logged in but course was deleted earlier and now the user enters the URL corresponding to the that deleted course, redirect back to the Home Page ( After checking that no course exists in the DB )
 
-  // Fetch the course 
+  // Fetch the course
   const course = await db.course.findUnique({
     where: { id: params.courseId },
   });
@@ -62,6 +63,7 @@ const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
             <IconComp icon={Pencil} />
             <h2 className="text-xl">Customize your course</h2>
           </div>
+          <TitleForm />
         </div>
       </div>
     </div>
