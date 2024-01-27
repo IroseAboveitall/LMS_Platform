@@ -63,7 +63,7 @@ const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
             <IconComp icon={Pencil} />
             <h2 className="text-xl">Customize your course</h2>
           </div>
-          <TitleForm />
+          <TitleForm initialData={course} courseId={course.id} />
         </div>
       </div>
     </div>
