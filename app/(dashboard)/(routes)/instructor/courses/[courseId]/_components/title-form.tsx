@@ -100,6 +100,7 @@ export const TitleForm = ({ initialData, courseId }: TitleFormProps) => {
                       {...field}
                     />
                   </FormControl>
+                  <FormMessage/>
                 </FormItem>
               )}
             />
