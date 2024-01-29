@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { UserButton } from "@clerk/nextjs";
 import { LogOut } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -35,10 +36,8 @@ export const NavbarRoutes = () => {
           </Button>
         </Link>
       )}
-      {/* TODO : Implement Authentication Button*/}
-      <Button size="sm" variant="userButton" className="rounded-full">
-        User
-      </Button>
+
+      <UserButton />
     </div>
   );
 };
