@@ -8,6 +8,7 @@ import { Pencil } from "lucide-react";
 
 import {
   Form,
+  FormLabel,
   FormControl,
   FormField,
   FormItem,
@@ -80,6 +81,33 @@ export const TitleForm = ({ initialData, courseId }: TitleFormProps) => {
 
       {/* 👇 Display the current Course Title if user has not clicked the "Edit Title" Button */}
       {!isEditing && <p className="text-sm mt-6">{initialData.title}</p>}
+
+      {/* 👇 Display the form if user has clicked the "Edit Title" Button */}
+      {isEditing && (
+        <Form {...form}>
+          <form
+            onSubmit={form.handleSubmit(onSubmit)}
+            className="space-y-4 mt-4"
+          >
+            <FormField
+              control={form.control}
+              name="title"
+              render={ ( { field } ) => (
+                <FormItem>
+                  <FormLabel>Title</FormLabel>
+                  <FormControl>
+                    <Input 
+                      disabled={isSubmitting}
+                      placeholder="e.g. C# for Beginners"
+                      {...field}
+                    />
+                  </FormControl>
+                </FormItem>
+              ) }
+            />
+          </form>
+        </Form>
+      )}
     </div>
   );
 };
