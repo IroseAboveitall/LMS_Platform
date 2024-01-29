@@ -100,10 +100,19 @@ export const TitleForm = ({ initialData, courseId }: TitleFormProps) => {
                       {...field}
                     />
                   </FormControl>
-                  <FormMessage/>
+                  <FormMessage />
                 </FormItem>
               )}
             />
+            <div className="flex items-center gap-x-2">
+              <Button
+                className="bg-[#0c0f2e] hover:bg-[#0c0f2ee0]"
+                disabled={!isValid || isSubmitting}
+                type="submit"
+              >
+                Save
+              </Button>
+            </div>
           </form>
         </Form>
       )}
