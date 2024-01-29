@@ -8,7 +8,6 @@ import { Pencil } from "lucide-react";
 
 import {
   Form,
-  FormLabel,
   FormControl,
   FormField,
   FormItem,
@@ -92,18 +91,17 @@ export const TitleForm = ({ initialData, courseId }: TitleFormProps) => {
             <FormField
               control={form.control}
               name="title"
-              render={ ( { field } ) => (
+              render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Title</FormLabel>
                   <FormControl>
-                    <Input 
+                    <Input
                       disabled={isSubmitting}
                       placeholder="e.g. C# for Beginners"
                       {...field}
                     />
                   </FormControl>
                 </FormItem>
-              ) }
+              )}
             />
           </form>
         </Form>
