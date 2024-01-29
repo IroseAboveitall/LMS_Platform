@@ -51,6 +51,7 @@ export const TitleForm = ({ initialData, courseId }: TitleFormProps) => {
 
   return (
     <div className="mt-6 border bg-slate-100 rounded-md p-4">
+      {/* 👇 Container for the "Course Title" & the Button */}
       <div className="font-medium flex items-center justify-between">
         Course title
         <Button
@@ -76,6 +77,9 @@ export const TitleForm = ({ initialData, courseId }: TitleFormProps) => {
           )}
         </Button>
       </div>
+
+      {/* 👇 Display the current Course Title if user has not clicked the "Edit Title" Button */}
+      {!isEditing && <p className="text-sm mt-6">{initialData.title}</p>}
     </div>
   );
 };
