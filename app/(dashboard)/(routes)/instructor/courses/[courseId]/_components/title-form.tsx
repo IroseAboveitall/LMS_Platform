@@ -16,6 +16,8 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 interface TitleFormProps {
   initialData: {
@@ -35,6 +37,8 @@ export const TitleForm = ({ initialData, courseId }: TitleFormProps) => {
 
   const toggleEdit = () => setIsEditing((current) => !current);
 
+  const router = useRouter();
+
   // Initialize the useForm
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -46,7 +50,14 @@ export const TitleForm = ({ initialData, courseId }: TitleFormProps) => {
 
   // Create the onSubmit function handler to call the API to submit the inputs.
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
-    console.log(data);
+    try {
+      await axios.patch(`/api/courses/${courseId}`, data);
+      toast.success("Course updated successfully");
+      toggleEdit();
+      router.refresh();
+    } catch {
+      toast.error("Well, this is awkward. Something went haywire.");
+    }
   };
 
   return (
