@@ -4,7 +4,7 @@ import * as z from "zod";
 import axios from "axios";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { Pencil, PlusCircle } from "lucide-react";
+import { ImageIcon, Pencil, PlusCircle } from "lucide-react";
 
 import {
   Form,
@@ -96,17 +96,15 @@ export const ImageForm = ({ initialData, courseId }: ImageFormProps) => {
         </Button>
       </div>
 
-      {/* 👇 Display the current Course Description if user has not clicked the "Edit Description" Button */}
-      {!isEditing && (
-        <p
-          className={cn(
-            "text-sm mt-2",
-            !initialData.description && "text-slate-500 italic"
-          )}
-        >
-          {initialData.description || "No description"}
-        </p>
-      )}
+      {/* 👇 Display the current Course Image if user has not clicked the "Edit Image" Button */}
+      {!isEditing &&
+        (!initialData.imageUrl ? (
+          <div className="mt-4 flex items-center justify-center h-60 bg-slate-200 rounded-md">
+            <ImageIcon className="h-10 w-10 text-slate-500" />
+          </div>
+        ) : (
+          <div>Current Image</div>
+        ))}
 
       {/* 👇 Display the form if user has clicked the "Edit Description" Button */}
       {isEditing && (
