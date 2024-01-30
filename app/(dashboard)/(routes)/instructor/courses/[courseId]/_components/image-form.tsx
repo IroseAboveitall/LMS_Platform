@@ -21,6 +21,7 @@ import { cn } from "@/lib/utils";
 import { Textarea } from "@/components/ui/textarea";
 import { Course } from "@prisma/client";
 import Image from "next/image";
+import { FileUpload } from "@/components/file-upload";
 
 interface ImageFormProps {
   initialData: Course;
@@ -108,38 +109,19 @@ export const ImageForm = ({ initialData, courseId }: ImageFormProps) => {
 
       {/* 👇 Display the form if user has clicked the "Edit Description" Button */}
       {isEditing && (
-        <Form {...form}>
-          <form
-            onSubmit={form.handleSubmit(onSubmit)}
-            className="space-y-4 mt-4"
-          >
-            <FormField
-              control={form.control}
-              name="imageUrl"
-              render={({ field }) => (
-                <FormItem>
-                  <FormControl>
-                    <Textarea
-                      disabled={isSubmitting}
-                      placeholder="e.g. 'This course involves ...'"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <div className="flex items-center gap-x-2">
-              <Button
-                className="bg-[#0c0f2e] hover:bg-[#0c0f2ee0]"
-                disabled={!isValid || isSubmitting}
-                type="submit"
-              >
-                Save
-              </Button>
-            </div>
-          </form>
-        </Form>
+        <div>
+          <FileUpload 
+            endpoint="courseImage"
+            onChange={ (url) => {
+              if(url) {
+                onSubmit( {imageUrl: url})
+              }
+            }}
+          />
+          <div className="text-xs text-muted-foreground mt-4">
+            16:9 aspect ratio recommended
+          </div>
+        </div>
       )}
     </div>
   );
