@@ -4,7 +4,7 @@ import * as z from "zod";
 import axios from "axios";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { Pencil } from "lucide-react";
+import { Pencil, PlusCircle } from "lucide-react";
 
 import {
   Form,
@@ -13,25 +13,26 @@ import {
   FormItem,
   FormMessage,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import { cn } from "@/lib/utils";
+import { Textarea } from "@/components/ui/textarea";
 import { Course } from "@prisma/client";
 
-interface TitleFormProps {
+interface ImageFormProps {
   initialData: Course;
   courseId: string;
 }
 
 const formSchema = z.object({
-  title: z.string().min(1, {
-    message: "Title cannot be empty",
+  imageUrl: z.string().min(1, {
+    message: "Image cannot be empty",
   }),
 });
 
-export const TitleForm = ({ initialData, courseId }: TitleFormProps) => {
+export const ImageForm = ({ initialData, courseId }: ImageFormProps) => {
   const [isEditing, setIsEditing] = useState(false);
 
   const toggleEdit = () => setIsEditing((current) => !current);
@@ -42,7 +43,7 @@ export const TitleForm = ({ initialData, courseId }: TitleFormProps) => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      title: initialData?.title,
+      imageUrl: initialData?.imageUrl || "",
     },
   });
 
@@ -65,7 +66,7 @@ export const TitleForm = ({ initialData, courseId }: TitleFormProps) => {
     <div className="mt-6 border bg-slate-100 rounded-md p-4">
       {/* 👇 Container for the "Course Title" & the Button */}
       <div className="font-medium flex items-center justify-between">
-        Course title
+        Course image
         <Button
           onClick={toggleEdit}
           variant="ghost"
@@ -75,25 +76,39 @@ export const TitleForm = ({ initialData, courseId }: TitleFormProps) => {
           {!isEditing && (
             <>
               <Pencil className="h-4 w-4 mr-2" />
-              Edit Title
+              Edit Description
             </>
           )} */}
           {/* 👇 Using Ternary operator instead ( This is just another way of conditional rendering ) */}
-          {isEditing ? (
-            <>Cancel</>
-          ) : (
+          {isEditing && <>Cancel</>}
+          {!isEditing && !initialData.imageUrl && (
+            <>
+              <PlusCircle className="h-4 w-4 mr-2" />
+              Add an image
+            </>
+          )}
+          {!isEditing && initialData.imageUrl && (
             <>
               <Pencil className="h-4 w-4 mr-2" />
-              Edit Title
+              Change image
             </>
           )}
         </Button>
       </div>
 
-      {/* 👇 Display the current Course Title if user has not clicked the "Edit Title" Button */}
-      {!isEditing && <p className="text-sm mt-6">{initialData.title}</p>}
+      {/* 👇 Display the current Course Description if user has not clicked the "Edit Description" Button */}
+      {!isEditing && (
+        <p
+          className={cn(
+            "text-sm mt-2",
+            !initialData.description && "text-slate-500 italic"
+          )}
+        >
+          {initialData.description || "No description"}
+        </p>
+      )}
 
-      {/* 👇 Display the form if user has clicked the "Edit Title" Button */}
+      {/* 👇 Display the form if user has clicked the "Edit Description" Button */}
       {isEditing && (
         <Form {...form}>
           <form
@@ -102,13 +117,13 @@ export const TitleForm = ({ initialData, courseId }: TitleFormProps) => {
           >
             <FormField
               control={form.control}
-              name="title"
+              name="imageUrl"
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
-                    <Input
+                    <Textarea
                       disabled={isSubmitting}
-                      placeholder="e.g. C# for Beginners"
+                      placeholder="e.g. 'This course involves ...'"
                       {...field}
                     />
                   </FormControl>
