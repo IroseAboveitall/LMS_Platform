@@ -20,6 +20,7 @@ import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { Textarea } from "@/components/ui/textarea";
 import { Course } from "@prisma/client";
+import Image from "next/image";
 
 interface ImageFormProps {
   initialData: Course;
@@ -64,7 +65,7 @@ export const ImageForm = ({ initialData, courseId }: ImageFormProps) => {
 
   return (
     <div className="mt-6 border bg-[#67ebf71f] rounded-md p-4">
-      {/* 👇 Container for the "Course Title" & the Button */}
+      {/* 👇 Container for the "Course Image" & the Button */}
       <div className="font-medium flex items-center justify-between">
         Course image
         <Button
@@ -72,14 +73,6 @@ export const ImageForm = ({ initialData, courseId }: ImageFormProps) => {
           variant="ghost"
           className="hover:bg-slate-300 flex justify-center mr-2"
         >
-          {/* {isEditing && <>Cancel</>}
-          {!isEditing && (
-            <>
-              <Pencil className="h-4 w-4 mr-2" />
-              Edit Description
-            </>
-          )} */}
-          {/* 👇 Using Ternary operator instead ( This is just another way of conditional rendering ) */}
           {isEditing && <>Cancel</>}
           {!isEditing && !initialData.imageUrl && (
             <>
@@ -96,14 +89,21 @@ export const ImageForm = ({ initialData, courseId }: ImageFormProps) => {
         </Button>
       </div>
 
-      {/* 👇 Display the current Course Image if user has not clicked the "Edit Image" Button */}
+      {/* 👇 Display the current Course Image if user has not clicked the "Change Image" Button */}
       {!isEditing &&
         (!initialData.imageUrl ? (
           <div className="mt-4 flex items-center justify-center h-60 bg-slate-200 rounded-md">
             <ImageIcon className="h-10 w-10 text-slate-500" />
           </div>
         ) : (
-          <div>Current Image</div>
+          <div className="relative aspect-video mt-2">
+            <Image
+              alt="Upload"
+              fill
+              className="object-cover rounded-md"
+              src={initialData.imageUrl}
+            />
+          </div>
         ))}
 
       {/* 👇 Display the form if user has clicked the "Edit Description" Button */}
