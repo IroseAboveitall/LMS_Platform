@@ -71,14 +71,6 @@ export const TitleForm = ({ initialData, courseId }: TitleFormProps) => {
           variant="ghost"
           className="hover:bg-slate-300 flex justify-center mr-2"
         >
-          {/* {isEditing && <>Cancel</>}
-          {!isEditing && (
-            <>
-              <Pencil className="h-4 w-4 mr-2" />
-              Edit Title
-            </>
-          )} */}
-          {/* 👇 Using Ternary operator instead ( This is just another way of conditional rendering ) */}
           {isEditing ? (
             <>Cancel</>
           ) : (
