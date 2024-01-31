@@ -2,10 +2,7 @@
 
 import * as z from "zod";
 import axios from "axios";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
 import { ImageIcon, Pencil, PlusCircle } from "lucide-react";
-
 
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
@@ -32,17 +29,6 @@ export const ImageForm = ({ initialData, courseId }: ImageFormProps) => {
   const toggleEdit = () => setIsEditing((current) => !current);
 
   const router = useRouter();
-
-  // Initialize the useForm
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      imageUrl: initialData?.imageUrl || "",
-    },
-  });
-
-  // Extract the states from the useForm hook instance
-  const { isSubmitting, isValid } = form.formState;
 
   // Create the onSubmit function handler to call the API to submit the inputs.
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
@@ -102,11 +88,11 @@ export const ImageForm = ({ initialData, courseId }: ImageFormProps) => {
       {/* 👇 Display the form if user has clicked the "Edit Description" Button */}
       {isEditing && (
         <div>
-          <FileUpload 
+          <FileUpload
             endpoint="courseImage"
-            onChange={ (url) => {
-              if(url) {
-                onSubmit( {imageUrl: url})
+            onChange={(url) => {
+              if (url) {
+                onSubmit({ imageUrl: url });
               }
             }}
           />
