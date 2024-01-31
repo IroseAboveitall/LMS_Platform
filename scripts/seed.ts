@@ -23,3 +23,5 @@ async function main() {
     await database.$disconnect();
   }
 }
+
+main();
