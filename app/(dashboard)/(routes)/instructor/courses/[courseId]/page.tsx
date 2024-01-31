@@ -24,6 +24,13 @@ const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
     where: { id: params.courseId },
   });
 
+  // Fetch the categories
+  const categories = await db.category.findMany({
+    orderBy: {
+      name: "asc",
+    },
+  });
+
   // Check if the course exists
   if (!course) {
     return redirect("/"); // Redirect back to the Home Page
@@ -72,10 +79,7 @@ const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
             initialData={course}
             courseId={course.id}
           />
-          <ImageForm 
-            initialData={course}
-            courseId={course.id}
-          />
+          <ImageForm initialData={course} courseId={course.id} />
         </div>
       </div>
     </div>
