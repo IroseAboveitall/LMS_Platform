@@ -25,7 +25,7 @@ const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
     where: { id: params.courseId },
   });
 
-  // Fetch the categories
+  // Fetch the categories ( So that it can be used to pass its fields as props to the Category Form Component )
   const categories = await db.category.findMany({
     orderBy: {
       name: "asc",
