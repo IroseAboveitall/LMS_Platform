@@ -65,6 +65,9 @@ export const CategoryForm = ({
     }
   };
 
+  const selectedOption = options.find(
+    (option) => option.value === initialData.categoryId
+  );
 
   return (
     <div className="mt-6 border bg-[#67ebf71f] rounded-md p-4">
@@ -92,10 +95,10 @@ export const CategoryForm = ({
         <p
           className={cn(
             "text-sm mt-2",
-            !initialData.description && "text-slate-500 italic"
+            !initialData.categoryId && "text-slate-500 italic"
           )}
         >
-          {initialData.description || "No description"}
+          {selectedOption?.label || "No category"}
         </p>
       )}
 

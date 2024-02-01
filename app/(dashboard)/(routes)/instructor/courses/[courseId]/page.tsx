@@ -1,3 +1,4 @@
+import { CategoryForm } from "@/app/(dashboard)/(routes)/instructor/courses/[courseId]/_components/category-form";
 import { DescriptionForm } from "@/app/(dashboard)/(routes)/instructor/courses/[courseId]/_components/description-form";
 import { ImageForm } from "@/app/(dashboard)/(routes)/instructor/courses/[courseId]/_components/image-form";
 import { TitleForm } from "@/app/(dashboard)/(routes)/instructor/courses/[courseId]/_components/title-form";
@@ -80,6 +81,14 @@ const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
             courseId={course.id}
           />
           <ImageForm initialData={course} courseId={course.id} />
+          <CategoryForm
+            initialData={course}
+            courseId={course.id}
+            options={categories.map((category) => ({
+              label: category.name,
+              value: category.id,
+            }))}
+          />
         </div>
       </div>
     </div>
