@@ -18,8 +18,8 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
-import { Textarea } from "@/components/ui/textarea";
 import { Course } from "@prisma/client";
+import { Combobox } from "@/components/ui/combobox";
 
 interface CategoryFormProps {
   initialData: Course;
@@ -65,6 +65,7 @@ export const CategoryForm = ({
     }
   };
 
+  // 👇 Store the selected option ( which is an object) for which the
   const selectedOption = options.find(
     (option) => option.value === initialData.categoryId
   );
@@ -90,7 +91,7 @@ export const CategoryForm = ({
         </Button>
       </div>
 
-      {/* 👇 Display the current Course Description if user has not clicked the "Edit Description" Button */}
+      {/* 👇 Display the selected Option Category if user has not clicked the "Edit Category" Button */}
       {!isEditing && (
         <p
           className={cn(
@@ -115,10 +116,10 @@ export const CategoryForm = ({
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
-                    <Textarea
-                      disabled={isSubmitting}
-                      placeholder="e.g. 'This course involves ...'"
-                      {...field}
+                    <Combobox
+                      options={options}
+                      value={field.value}
+                      onChange={field.onChange}
                     />
                   </FormControl>
                   <FormMessage />
