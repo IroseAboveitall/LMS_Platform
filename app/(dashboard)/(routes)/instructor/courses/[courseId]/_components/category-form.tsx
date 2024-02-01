@@ -21,21 +21,21 @@ import { cn } from "@/lib/utils";
 import { Textarea } from "@/components/ui/textarea";
 import { Course } from "@prisma/client";
 
-interface DescriptionFormProps {
+interface CategoryFormProps {
   initialData: Course;
   courseId: string;
+  options: { label: string; value: string }[]; // 👈👈👈 Match combobox values
 }
 
 const formSchema = z.object({
-  description: z.string().min(1, {
-    message: "Description cannot be empty",
-  }),
+  categoryId: z.string().min(1),
 });
 
-export const DescriptionForm = ({
+export const CategoryForm = ({
   initialData,
   courseId,
-}: DescriptionFormProps) => {
+  options,
+}: CategoryFormProps) => {
   const [isEditing, setIsEditing] = useState(false);
 
   const toggleEdit = () => setIsEditing((current) => !current);
@@ -46,7 +46,7 @@ export const DescriptionForm = ({
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      description: initialData?.description || "",
+      categoryId: initialData?.categoryId || "",
     },
   });
 
@@ -65,23 +65,23 @@ export const DescriptionForm = ({
     }
   };
 
+
   return (
     <div className="mt-6 border bg-[#67ebf71f] rounded-md p-4">
       {/* 👇 Container for the "Course Title" & the Button */}
       <div className="font-medium flex items-center justify-between">
-        Course Description
+        Course category
         <Button
           onClick={toggleEdit}
           variant="ghost"
           className="hover:bg-slate-300 flex justify-center mr-2"
         >
-          {/* 👇 Using Ternary operator instead ( This is just another way of conditional rendering ) */}
           {isEditing ? (
             <>Cancel</>
           ) : (
             <>
               <Pencil className="h-4 w-4 mr-2" />
-              Edit Description
+              Edit category
             </>
           )}
         </Button>
@@ -108,7 +108,7 @@ export const DescriptionForm = ({
           >
             <FormField
               control={form.control}
-              name="description"
+              name="categoryId"
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
