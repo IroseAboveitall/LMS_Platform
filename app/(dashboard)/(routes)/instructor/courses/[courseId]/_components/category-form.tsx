@@ -118,8 +118,8 @@ export const CategoryForm = ({
                   <FormControl>
                     <Combobox
                       options={options}
-                      value={field.value}
-                      onChange={field.onChange}
+                      value={field.value} // 👈 This is just binding the value prop of Combobox to the value property of the field object
+                      onChange={field.onChange} // 👈 This is just binding the onChange prop of Combobox to the onChange handler of the field object
                     />
                   </FormControl>
                   <FormMessage />

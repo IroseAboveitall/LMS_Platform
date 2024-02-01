@@ -26,6 +26,7 @@ interface ComboboxProps {
 
 export const Combobox = ({ options, value, onChange }: ComboboxProps) => {
   const [open, setOpen] = React.useState(false);
+  // const [value, setValue] = React.useState("");
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -51,8 +52,14 @@ export const Combobox = ({ options, value, onChange }: ComboboxProps) => {
               <CommandItem
                 key={option.value}
                 value={option.value}
-                onSelect={() => {
+                onSelect={(currentValue) => {
                   onChange(option.value === value ? "" : option.value);
+                  // setValue(option.value === value1 ? "" : option.value);
+                  // const value = options.find(
+                  //   (option) => option.label.toLowerCase() === currentValue
+                  // )?.value;
+                  // setValue(value ?? "");
+                  // setValue(option.value === value ? "" : option.value);
                   setOpen(false);
                 }}
               >
