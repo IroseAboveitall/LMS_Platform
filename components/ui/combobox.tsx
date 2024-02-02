@@ -52,7 +52,7 @@ export const Combobox = ({ options, categoryId, onChange }: ComboboxProps) => {
             {options.map((option) => (
               <CommandItem
                 key={option.value}
-                value={option.value}
+                value={option.value}  // 👈 This has to be lowercase name of the option not some kind of id
                 // value={option.categoryId}
                 onSelect={() => {
                   // onChange(currentValue === value ? "" : currentValue);
