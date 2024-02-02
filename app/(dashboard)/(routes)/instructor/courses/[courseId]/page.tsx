@@ -32,6 +32,14 @@ const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
     },
   });
 
+  const modifiedCategories = categories.map((item) => ({
+    value: item.name.toLowerCase().replace(/\s/g, ""),
+    label: item.name,
+    categoryId: item.id,
+  }));
+
+  // console.log(newCategories);
+
   // Check if the course exists
   if (!course) {
     return redirect("/"); // Redirect back to the Home Page
@@ -84,10 +92,11 @@ const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
           <CategoryForm
             initialData={course}
             courseId={course.id}
-            options={categories.map((category) => ({
-              label: category.name,
-              value: category.id,
-            }))}
+            // options={categories.map((category) => ({
+            //   label: category.name,
+            //   value: category.id,
+            // }))}
+            options={modifiedCategories}
           />
         </div>
       </div>

@@ -24,7 +24,7 @@ import { Combobox } from "@/components/ui/combobox";
 interface CategoryFormProps {
   initialData: Course;
   courseId: string;
-  options: { label: string; value: string }[]; // 👈👈👈 Match combobox values
+  options: { label: string; value: string; categoryId: string }[]; // 👈👈👈 Match combobox values
 }
 
 const formSchema = z.object({
@@ -67,7 +67,7 @@ export const CategoryForm = ({
 
   // 👇 Store the selected option ( which is an object) for which the
   const selectedOption = options.find(
-    (option) => option.value === initialData.categoryId
+    (option) => option.categoryId === initialData.categoryId
   );
 
   return (
@@ -118,7 +118,7 @@ export const CategoryForm = ({
                   <FormControl>
                     <Combobox
                       options={options}
-                      value={field.value} // 👈 This is just binding the value prop of Combobox to the value property of the field object
+                      categoryId={field.value} // 👈 This is just binding the value prop of Combobox to the value property of the field object
                       onChange={field.onChange} // 👈 This is just binding the onChange prop of Combobox to the onChange handler of the field object
                     />
                   </FormControl>

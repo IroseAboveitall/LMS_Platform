@@ -19,12 +19,13 @@ import {
 } from "@/components/ui/popover";
 
 interface ComboboxProps {
-  options: { label: string; value: string }[];
-  value?: string; // default value
+  options: { label: string; value: string; categoryId: string }[];
+  categoryId?: string; // default value : it is categoryId
   onChange: (value: string) => void;
 }
 
-export const Combobox = ({ options, value, onChange }: ComboboxProps) => {
+// export const Combobox = ({ options, value, onChange }: ComboboxProps) => {
+export const Combobox = ({ options, categoryId, onChange }: ComboboxProps) => {
   const [open, setOpen] = React.useState(false);
   // const [value, setValue] = React.useState("");
 
@@ -37,8 +38,8 @@ export const Combobox = ({ options, value, onChange }: ComboboxProps) => {
           aria-expanded={open}
           className="w-[230px] justify-between"
         >
-          {value
-            ? options.find((option) => option.value === value)?.label
+          {categoryId
+            ? options.find((option) => option.categoryId === categoryId)?.label
             : "Select option..."}
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
@@ -52,8 +53,17 @@ export const Combobox = ({ options, value, onChange }: ComboboxProps) => {
               <CommandItem
                 key={option.value}
                 value={option.value}
-                onSelect={(currentValue) => {
-                  onChange(option.value === value ? "" : option.value);
+                // value={option.categoryId}
+                onSelect={() => {
+                  // onChange(currentValue === value ? "" : currentValue);
+                  onChange(
+                    option.categoryId === categoryId ? "" : option.categoryId
+                  );
+                  // onChange(
+                  //   option.categoryId === categoryId ? "" : option.value
+                  // );
+                  // setValue(currentValue === value ? "" : currentValue);
+                  // setValue(option.value === value ? "" : option.value);
                   // setValue(option.value === value1 ? "" : option.value);
                   // const value = options.find(
                   //   (option) => option.label.toLowerCase() === currentValue
@@ -66,7 +76,9 @@ export const Combobox = ({ options, value, onChange }: ComboboxProps) => {
                 <Check
                   className={cn(
                     "mr-2 h-4 w-4",
-                    value === option.value ? "opacity-100" : "opacity-0"
+                    categoryId === option.categoryId
+                      ? "opacity-100"
+                      : "opacity-0"
                   )}
                 />
                 {option.label}
