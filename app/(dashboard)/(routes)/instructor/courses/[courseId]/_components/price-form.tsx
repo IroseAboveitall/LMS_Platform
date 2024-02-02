@@ -18,8 +18,8 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
-import { Textarea } from "@/components/ui/textarea";
 import { Course } from "@prisma/client";
+import { Input } from "@/components/ui/input";
 
 interface PriceFormProps {
   initialData: Course;
@@ -27,9 +27,7 @@ interface PriceFormProps {
 }
 
 const formSchema = z.object({
-  description: z.string().min(1, {
-    message: "Description cannot be empty",
-  }),
+  price: z.coerce.number(),
 });
 
 export const PriceForm = ({ initialData, courseId }: PriceFormProps) => {
@@ -43,7 +41,7 @@ export const PriceForm = ({ initialData, courseId }: PriceFormProps) => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      description: initialData?.description || "",
+      price: initialData?.price || undefined,
     },
   });
 
@@ -66,7 +64,7 @@ export const PriceForm = ({ initialData, courseId }: PriceFormProps) => {
     <div className="mt-6 border bg-[#67ebf71f] rounded-md p-4">
       {/* 👇 Container for the "Course Title" & the Button */}
       <div className="font-medium flex items-center justify-between">
-        Course Description
+        Course price
         <Button
           onClick={toggleEdit}
           variant="ghost"
@@ -78,7 +76,7 @@ export const PriceForm = ({ initialData, courseId }: PriceFormProps) => {
           ) : (
             <>
               <Pencil className="h-4 w-4 mr-2" />
-              Edit Description
+              Edit price
             </>
           )}
         </Button>
@@ -89,10 +87,10 @@ export const PriceForm = ({ initialData, courseId }: PriceFormProps) => {
         <p
           className={cn(
             "text-sm mt-2",
-            !initialData.description && "text-slate-500 italic"
+            !initialData.price && "text-slate-500 italic"
           )}
         >
-          {initialData.description || "No description"}
+          {initialData.price || "No price"}
         </p>
       )}
 
@@ -105,13 +103,15 @@ export const PriceForm = ({ initialData, courseId }: PriceFormProps) => {
           >
             <FormField
               control={form.control}
-              name="description"
+              name="price"
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
-                    <Textarea
+                    <Input
+                      type="number"
+                      step="0.01"
                       disabled={isSubmitting}
-                      placeholder="e.g. 'This course involves ...'"
+                      placeholder="Specify the course fee"
                       {...field}
                     />
                   </FormControl>
