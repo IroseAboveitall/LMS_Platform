@@ -5,7 +5,7 @@ import { TitleForm } from "@/app/(dashboard)/(routes)/instructor/courses/[course
 import { IconComp } from "@/components/icon-comp";
 import { db } from "@/lib/db";
 import { auth } from "@clerk/nextjs";
-import { LayoutDashboard, ListChecks } from "lucide-react";
+import { CircleDollarSign, LayoutDashboard, ListChecks } from "lucide-react";
 import { redirect } from "next/navigation";
 
 const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
@@ -108,7 +108,13 @@ const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
               <IconComp icon={ListChecks} />
               <h2 className="text-xl">Course Chapters</h2>
             </div>
-            <div>TODO: Chapters</div>
+            <div>TODO: Chapters </div>
+          </div>
+          <div>
+            <div className="flex items-center gap-x-2">
+              <IconComp icon={CircleDollarSign} />
+              <h2 className="text-xl">Offer your Course at a Price</h2>
+            </div>
           </div>
         </div>
       </div>
