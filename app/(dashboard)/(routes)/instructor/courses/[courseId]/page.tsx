@@ -5,7 +5,7 @@ import { TitleForm } from "@/app/(dashboard)/(routes)/instructor/courses/[course
 import { IconComp } from "@/components/icon-comp";
 import { db } from "@/lib/db";
 import { auth } from "@clerk/nextjs";
-import { LayoutDashboard } from "lucide-react";
+import { LayoutDashboard, ListChecks } from "lucide-react";
 import { redirect } from "next/navigation";
 
 const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
@@ -76,6 +76,7 @@ const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
 
       {/* 👇 */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-16">
+        {/* 👇 This is the container for the left side of the courseId page for md screens and larger */}
         <div>
           <div className="flex items-center gap-x-2">
             <IconComp icon={LayoutDashboard} />
@@ -98,6 +99,15 @@ const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
             // }))}
             options={modifiedCategories}
           />
+        </div>
+
+        {/* 👇 This is the container for Right side of the courseId page for md screens and larger*/}
+        <div className="space-y-6">
+          <div>
+            <div className="flex items-center gap-x-2">
+              <IconComp icon={ListChecks} />
+            </div>
+          </div>
         </div>
       </div>
     </div>
