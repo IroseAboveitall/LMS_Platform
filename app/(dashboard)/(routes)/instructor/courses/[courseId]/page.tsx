@@ -1,6 +1,7 @@
 import { CategoryForm } from "@/app/(dashboard)/(routes)/instructor/courses/[courseId]/_components/category-form";
 import { DescriptionForm } from "@/app/(dashboard)/(routes)/instructor/courses/[courseId]/_components/description-form";
 import { ImageForm } from "@/app/(dashboard)/(routes)/instructor/courses/[courseId]/_components/image-form";
+import { PriceForm } from "@/app/(dashboard)/(routes)/instructor/courses/[courseId]/_components/price-form";
 import { TitleForm } from "@/app/(dashboard)/(routes)/instructor/courses/[courseId]/_components/title-form";
 import { IconComp } from "@/components/icon-comp";
 import { db } from "@/lib/db";
@@ -115,6 +116,7 @@ const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
               <IconComp icon={CircleDollarSign} />
               <h2 className="text-xl">Offer your Course at a Price</h2>
             </div>
+            <PriceForm initialData={course} courseId={course.id}/>
           </div>
         </div>
       </div>
