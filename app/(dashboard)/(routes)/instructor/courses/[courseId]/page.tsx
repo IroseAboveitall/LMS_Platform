@@ -132,6 +132,7 @@ const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
               <IconComp icon={File} />
               <h2 className="text-xl">Resources for the course</h2>
             </div>
+            <ImageForm initialData={course} courseId={course.id} />
           </div>
         </div>
       </div>
