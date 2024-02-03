@@ -1,3 +1,4 @@
+import { AttachmentForm } from "@/app/(dashboard)/(routes)/instructor/courses/[courseId]/_components/attachment-form";
 import { CategoryForm } from "@/app/(dashboard)/(routes)/instructor/courses/[courseId]/_components/category-form";
 import { DescriptionForm } from "@/app/(dashboard)/(routes)/instructor/courses/[courseId]/_components/description-form";
 import { ImageForm } from "@/app/(dashboard)/(routes)/instructor/courses/[courseId]/_components/image-form";
@@ -26,10 +27,18 @@ const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
 
   //  👇 If the user is logged in but course was deleted earlier and now the user enters the URL corresponding to the that deleted course, redirect back to the Home Page ( After checking that no course exists in the DB )
 
-  // Fetch the course
+  // Fetch the course along with the attachments
   const course = await db.course.findUnique({
     where: { id: params.courseId },
+    include: {
+      attachments: {
+        orderBy: {
+          createdAt: "desc",
+        },
+      },
+    },
   });
+  //Here, attachments is a related model or table associated with the course model. The include property is used to specify related models that you want to retrieve along with the main model. In this case, it's asking to include the attachments associated with the course.
 
   // Fetch the categories ( So that it can be used to pass its fields as props to the Category Form Component )
   const categories = await db.category.findMany({
@@ -132,7 +141,7 @@ const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
               <IconComp icon={File} />
               <h2 className="text-xl">Resources for the course</h2>
             </div>
-            <ImageForm initialData={course} courseId={course.id} />
+            <AttachmentForm initialData={course} courseId={course.id} />
           </div>
         </div>
       </div>
