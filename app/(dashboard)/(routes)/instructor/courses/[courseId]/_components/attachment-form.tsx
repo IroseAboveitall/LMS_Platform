@@ -34,7 +34,7 @@ export const AttachmentForm = ({
   // Create the onSubmit function handler to call the API to submit the inputs.
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
     try {
-      await axios.patch(`/api/courses/${courseId}`, data);
+      await axios.patch(`/api/courses/${courseId}/attachments`, data);
       toast.success("Course updated successfully");
       toggleEdit();
       router.refresh();
