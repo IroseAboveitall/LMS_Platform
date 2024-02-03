@@ -7,3 +7,6 @@ export const formatPrice = (price: number) => {
     .replace(/^(\D+)/, "$1 ")
     .replace(/\s+/g, " ");
 };
+
+
+// Adding a space Resource :  https://stackoverflow.com/questions/44533919/space-after-symbol-with-js-intlg
