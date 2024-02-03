@@ -2,7 +2,7 @@
 
 import * as z from "zod";
 import axios from "axios";
-import { ImageIcon, Pencil, PlusCircle } from "lucide-react";
+import { File, ImageIcon, Pencil, PlusCircle } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
@@ -70,6 +70,19 @@ export const AttachmentForm = ({
             <p className="text-sm mt-2 text-slate-500 italic">
               No attachments yet
             </p>
+          )}
+          {initialData.attachments.length > 0 && (
+            <div>
+              {initialData.attachments.map((attachment) => (
+                <div
+                  key={attachment.id}
+                  className="flex items-center mb-3 p-3 w-full bg-sky-100 border-sky-200 border text-sky-700 rounded-md"
+                >
+                  <File className="h-4 w-4 mr-2 flex-shrink-0" />
+                  <p className="text-sm line-clamp-1">{attachment.name}</p>
+                </div>
+              ))}
+            </div>
           )}
         </>
       )}
