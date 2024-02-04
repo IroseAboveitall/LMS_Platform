@@ -2,7 +2,7 @@
 
 import * as z from "zod";
 import axios from "axios";
-import { File, ImageIcon, Pencil, PlusCircle } from "lucide-react";
+import { File, ImageIcon, Loader2, Pencil, PlusCircle, X } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
@@ -26,6 +26,8 @@ export const AttachmentForm = ({
   courseId,
 }: AttachmentFormProps) => {
   const [isEditing, setIsEditing] = useState(false);
+  const [deletingId, setDeletingId] = useState<string | null>(null);
+  // const [deletingId, setDeletingId] = useState(null);
 
   const toggleEdit = () => setIsEditing((current) => !current);
 
@@ -80,6 +82,16 @@ export const AttachmentForm = ({
                 >
                   <File className="h-4 w-4 mr-2 flex-shrink-0" />
                   <p className="text-sm line-clamp-1">{attachment.name}</p>
+                  {deletingId === attachment.id && (
+                    <div>
+                      <Loader2 className="h-4 w-4 animate-spin" />
+                    </div>
+                  )}
+                  {deletingId !== attachment.id && (
+                    <button className="ml-auto hover:opacity-75 transition">
+                      <X className="h-4 w-4" />
+                    </button>
+                  )}
                 </div>
               ))}
             </div>
