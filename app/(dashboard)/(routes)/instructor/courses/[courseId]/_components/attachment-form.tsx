@@ -45,6 +45,19 @@ export const AttachmentForm = ({
     }
   };
 
+  const onDelete = async (id: string) => {
+    try {
+      setDeletingId(id);
+      await axios.delete(`/api/courses/${courseId}/attachments/${id}`);
+      toast.success("Attachment deleted successfully");
+      router.refresh();
+    } catch (error) {
+      toast.error("Something went wrong");
+    } finally {
+      setDeletingId(null);
+    }
+  };
+
   return (
     <div className="mt-6 border bg-[#67ebf71f] rounded-md p-4">
       {/* 👇 Container for the "Course Image" & the Button */}
