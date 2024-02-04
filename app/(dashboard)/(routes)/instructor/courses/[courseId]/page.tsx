@@ -1,5 +1,6 @@
 import { AttachmentForm } from "@/app/(dashboard)/(routes)/instructor/courses/[courseId]/_components/attachment-form";
 import { CategoryForm } from "@/app/(dashboard)/(routes)/instructor/courses/[courseId]/_components/category-form";
+import { ChaptersForm } from "@/app/(dashboard)/(routes)/instructor/courses/[courseId]/_components/chapters-form";
 import { DescriptionForm } from "@/app/(dashboard)/(routes)/instructor/courses/[courseId]/_components/description-form";
 import { ImageForm } from "@/app/(dashboard)/(routes)/instructor/courses/[courseId]/_components/image-form";
 import { PriceForm } from "@/app/(dashboard)/(routes)/instructor/courses/[courseId]/_components/price-form";
@@ -123,7 +124,11 @@ const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
               <IconComp icon={ListChecks} />
               <h2 className="text-xl">Course Chapters</h2>
             </div>
-            <div>TODO: Chapters </div>
+            <ChaptersForm
+              // initialData={{ ...course, description: course.description! }}
+              initialData={course}
+              courseId={course.id}
+            />
           </div>
 
           {/* Container for the Price Form */}
