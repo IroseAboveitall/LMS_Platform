@@ -26,12 +26,15 @@ const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
     return redirect("/"); // Redirect back to the Root Page i.e. the Home Page
   }
 
-  //  👇 If the user is logged in but course was deleted earlier and now the user enters the URL corresponding to the that deleted course, redirect back to the Home Page ( After checking that no course exists in the DB )
-
-  // Fetch the course along with the attachments
+  // Fetch the course along with the attachments and the chapters
   const course = await db.course.findUnique({
-    where: { id: params.courseId },
+    where: { id: params.courseId, userId },
     include: {
+      chapters: {
+        orderBy: {
+          position: "asc",
+        },
+      },
       attachments: {
         orderBy: {
           createdAt: "desc",
@@ -39,6 +42,7 @@ const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
       },
     },
   });
+
   //Here, attachments is a related model or table associated with the course model. The include property is used to specify related models that you want to retrieve along with the main model. In this case, it's asking to include the attachments associated with the course.
 
   // Fetch the categories ( So that it can be used to pass its fields as props to the Category Form Component )
@@ -55,6 +59,8 @@ const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
   }));
 
   // console.log(newCategories);
+
+  //  👇 If the user is logged in but course was deleted earlier and now the user enters the URL corresponding to the that deleted course, redirect back to the Home Page ( After checking that no course exists in the DB )
 
   // Check if the course exists
   if (!course) {
