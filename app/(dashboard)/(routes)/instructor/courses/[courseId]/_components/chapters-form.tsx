@@ -20,6 +20,7 @@ import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { Textarea } from "@/components/ui/textarea";
 import { Course } from "@prisma/client";
+import { Input } from "@/components/ui/input";
 
 interface ChaptersFormProps {
   initialData: Course;
@@ -83,19 +84,7 @@ export const ChaptersForm = ({ initialData, courseId }: ChaptersFormProps) => {
         </Button>
       </div>
 
-      {/* 👇 Display the current Course Description if user has not clicked the "Edit Description" Button */}
-      {!isCreating && (
-        <p
-          className={cn(
-            "text-sm mt-2",
-            !initialData.description && "text-slate-500 italic"
-          )}
-        >
-          {initialData.description || "No description"}
-        </p>
-      )}
-
-      {/* 👇 Display the form if user has clicked the "Edit Description" Button */}
+      {/* 👇 Display the form if user has clicked the "Add a Chapter" Button */}
       {isCreating && (
         <Form {...form}>
           <form
@@ -108,9 +97,9 @@ export const ChaptersForm = ({ initialData, courseId }: ChaptersFormProps) => {
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
-                    <Textarea
+                    <Input
                       disabled={isSubmitting}
-                      placeholder="e.g. 'This course involves ...'"
+                      placeholder="e.g. 'Chapter Intro Part 1'"
                       {...field}
                     />
                   </FormControl>
@@ -118,17 +107,22 @@ export const ChaptersForm = ({ initialData, courseId }: ChaptersFormProps) => {
                 </FormItem>
               )}
             />
-            <div className="flex items-center gap-x-2">
-              <Button
-                className="bg-[#0c0f2e] hover:bg-[#0c0f2ee0]"
-                disabled={!isValid || isSubmitting}
-                type="submit"
-              >
-                Save
-              </Button>
-            </div>
+
+            <Button
+              className="bg-[#0c0f2e] hover:bg-[#0c0f2ee0]"
+              disabled={!isValid || isSubmitting}
+              type="submit"
+            >
+              Create
+            </Button>
           </form>
         </Form>
+      )}
+      {!isCreating && <div>No Chapters</div>}
+      {!isCreating && (
+        <p className="text-xs text-muted-foreground mt-4">
+          Drag to reorder chapters
+        </p>
       )}
     </div>
   );
