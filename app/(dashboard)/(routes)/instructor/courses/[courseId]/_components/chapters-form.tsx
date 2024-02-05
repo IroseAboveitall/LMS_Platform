@@ -125,7 +125,11 @@ export const ChaptersForm = ({ initialData, courseId }: ChaptersFormProps) => {
             !initialData.chapters.length && "text-slate-500 italic"
           )}
         >
+          {/* 👇 If there are NO chapters : Display "No chapters" */}
           {!initialData.chapters.length && "No chapters"}
+
+          
+          {/* 👇 If there are chapters : List out the only chapter or all the chapters */}
           <ChaptersList
             items={initialData.chapters || []}
             onReorder={() => {}}
