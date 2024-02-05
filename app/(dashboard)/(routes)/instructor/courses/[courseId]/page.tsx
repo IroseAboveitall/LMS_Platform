@@ -73,6 +73,8 @@ const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
     course.imageUrl,
     course.price,
     course.categoryId,
+    course.chapters.some((chapter) => chapter.isPublished),
+    // 👆 At least one element in the array of course.chapters satisfies the condition that the chapter is published
   ];
 
   const totalFields = requiredFields.length;
