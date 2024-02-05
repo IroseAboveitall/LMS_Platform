@@ -27,9 +27,7 @@ interface ChaptersFormProps {
 }
 
 const formSchema = z.object({
-  description: z.string().min(1, {
-    message: "Description cannot be empty",
-  }),
+  title: z.string().min(1),
 });
 
 export const ChaptersForm = ({ initialData, courseId }: ChaptersFormProps) => {
