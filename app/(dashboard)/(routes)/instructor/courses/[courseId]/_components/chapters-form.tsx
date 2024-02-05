@@ -18,12 +18,11 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
-import { Textarea } from "@/components/ui/textarea";
-import { Course } from "@prisma/client";
+import { Chapter, Course } from "@prisma/client";
 import { Input } from "@/components/ui/input";
 
 interface ChaptersFormProps {
-  initialData: Course;
+  initialData: Course & { chapters: Chapter[] };
   courseId: string;
 }
 
@@ -118,7 +117,17 @@ export const ChaptersForm = ({ initialData, courseId }: ChaptersFormProps) => {
           </form>
         </Form>
       )}
-      {!isCreating && <div>No Chapters</div>}
+      {!isCreating && (
+        <div
+          className={cn(
+            "text-sm mt-2",
+            !initialData.chapters.length && "text-slate-500 italic"
+          )}
+        >
+          {!initialData.chapters.length && "No chapters"}
+          {/* TO DO : A list of Chapters */}
+        </div>
+      )}
       {!isCreating && (
         <p className="text-xs text-muted-foreground mt-4">
           Drag to reorder chapters
