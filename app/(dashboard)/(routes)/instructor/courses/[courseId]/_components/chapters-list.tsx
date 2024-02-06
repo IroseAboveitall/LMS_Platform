@@ -10,7 +10,7 @@ import {
   DropResult,
 } from "@hello-pangea/dnd";
 import { cn } from "@/lib/utils";
-import { Grip } from "lucide-react";
+import { Grip, Pencil } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 
 interface ChaptersListProps {
@@ -71,7 +71,7 @@ export const ChaptersList = ({
                       <Grip className="h-5 w-5" />
                     </div>
                     {chapter.title}
-                    <div className="ml-auto pr-2 flex-items-center gap-x-2">
+                    <div className="ml-auto pr-2 flex items-center gap-x-2">
                       {chapter.isFree && <Badge>Free</Badge>}
                       <Badge
                         className={cn(
@@ -81,6 +81,10 @@ export const ChaptersList = ({
                       >
                         {chapter.isPublished ? "Published" : "Draft"}
                       </Badge>
+                      <Pencil
+                        onClick={() => onEdit(chapter.id)}
+                        className="w-4 h-4 cursor-pointer hover:opacity-75 transition"
+                      />
                     </div>
                   </div>
                 )}
