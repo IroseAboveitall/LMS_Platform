@@ -43,7 +43,7 @@ export const ChaptersList = ({
     <DragDropContext onDragEnd={() => {}}>
       <Droppable droppableId="chapters">
         {(provided) => (
-          <div {...provided.droppableProps} ref={provided.innerRef}>
+          <div   {...provided.droppableProps} ref={provided.innerRef}>
             {chapters.map((chapter, index) => (
               <Draggable
                 key={chapter.id}
@@ -90,6 +90,7 @@ export const ChaptersList = ({
                 )}
               </Draggable>
             ))}
+            {provided.placeholder}
           </div>
         )}
       </Droppable>
