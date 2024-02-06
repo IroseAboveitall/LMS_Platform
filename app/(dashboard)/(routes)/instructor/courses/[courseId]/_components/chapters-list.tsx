@@ -35,15 +35,45 @@ export const ChaptersList = ({
     setChapters(items);
   }, [items]);
 
+  const onDragEnd = (result: DropResult) => {
+    // Just break the function if there is no "result.destination"
+    if (!result.destination) return;
+
+    // Store the chapters array of objects in a temporary array
+    const items = Array.from(chapters);
+
+    // Delete 1 item at position "result.source.index" from the "items" array and store it in "reorderedItem"
+    const [reorderedItem] = items.splice(result.source.index, 1);
+
+    // Add the deleted item at position "result.destination.index"
+    items.splice(result.destination.index, 0, reorderedItem);
+
+    const startIndex = Math.min(result.source.index, result.destination.index);
+    const endIndex = Math.max(result.source.index, result.destination.index);
+
+    // Extract the array items containing the removed items from the "items" array and store it in the updatedChapters array.
+    const updatedChapters = items.slice(startIndex, endIndex + 1);
+
+    // Update the state of the chapters array with the modified items array. This will trigger a re-render of the component with the new order of chapters.
+    setChapters(items);
+
+    const bulkUpdateData = updatedChapters.map((chapter) => ({
+      id: chapter.id,
+      position: items.findIndex((item) => item.id === chapter.id),
+    }));
+
+    onReorder(bulkUpdateData);
+  };
+
   if (!isMounted) {
     return null;
   }
 
   return (
-    <DragDropContext onDragEnd={() => {}}>
+    <DragDropContext onDragEnd={onDragEnd}>
       <Droppable droppableId="chapters">
         {(provided) => (
-          <div   {...provided.droppableProps} ref={provided.innerRef}>
+          <div {...provided.droppableProps} ref={provided.innerRef}>
             {chapters.map((chapter, index) => (
               <Draggable
                 key={chapter.id}
