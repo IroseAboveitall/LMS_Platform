@@ -3,6 +3,13 @@
 import { Chapter } from "@prisma/client";
 import { useEffect, useState } from "react";
 
+import {
+  DragDropContext,
+  Droppable,
+  Draggable,
+  DropResult,
+} from "@hello-pangea/dnd";
+
 interface ChaptersListProps {
   items: Chapter[];
   onReorder: (updateData: { id: string; position: number }[]) => void;
