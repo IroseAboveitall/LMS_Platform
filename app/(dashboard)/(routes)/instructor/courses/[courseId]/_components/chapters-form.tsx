@@ -62,6 +62,21 @@ export const ChaptersForm = ({ initialData, courseId }: ChaptersFormProps) => {
     }
   };
 
+  const onReorder = async( updateData: { id: string, position: number}[]){
+    try {
+      setIsUpdating(true);
+      await axios.put(`/api/courses/${courseId}/chapters/reorder`, {
+        list: updateData,
+      })
+      toast.success("Chapters reordered successfully");
+      router.refresh();
+    } catch (error) {
+      toast.error("Something went wrong");
+    } finally {
+      setIsUpdating(false);
+    }
+  };
+
   return (
     <div className="mt-6 border bg-[#67ebf71f] rounded-md p-4">
       {/* 👇 Container for the "Course Title" & the Button */}
@@ -128,11 +143,10 @@ export const ChaptersForm = ({ initialData, courseId }: ChaptersFormProps) => {
           {/* 👇 If there are NO chapters : Display "No chapters" */}
           {!initialData.chapters.length && "No chapters"}
 
-          
           {/* 👇 If there are chapters : List out the only chapter or all the chapters */}
           <ChaptersList
             items={initialData.chapters || []}
-            onReorder={() => {}}
+            onReorder={onReorder}
             onEdit={() => {}}
           />
         </div>
