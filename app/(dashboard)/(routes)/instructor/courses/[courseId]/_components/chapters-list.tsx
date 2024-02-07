@@ -36,6 +36,7 @@ export const ChaptersList = ({
   }, [items]);
 
   const onDragEnd = (result: DropResult) => {
+    // ChatGPT Explanation:  https://chat.openai.com/share/78d5aa1b-0b7a-4070-9d3e-8beabfc6d83f  
     // Just break the function if there is no "result.destination"
     if (!result.destination) return;
 
