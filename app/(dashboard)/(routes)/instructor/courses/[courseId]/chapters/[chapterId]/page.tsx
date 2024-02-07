@@ -1,3 +1,4 @@
+import { ChapterTitleForm } from "@/app/(dashboard)/(routes)/instructor/courses/[courseId]/chapters/[chapterId]/_components/chapter-title-form";
 import { IconComp } from "@/components/icon-comp";
 import { db } from "@/lib/db";
 import { auth } from "@clerk/nextjs";
@@ -62,7 +63,7 @@ const ChapterIdPage = async ({
               <IconComp icon={LayoutDashboard} />
               <h2 className="text-xl">Customize your chapter</h2>
             </div>
-            {/* TODO : Chapter Title Form */}
+            <ChapterTitleForm />
           </div>
         </div>
       </div>
