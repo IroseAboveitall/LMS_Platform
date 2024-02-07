@@ -77,6 +77,10 @@ export const ChaptersForm = ({ initialData, courseId }: ChaptersFormProps) => {
     }
   };
 
+  const onEdit = (id: string) => {
+    router.push(`/instructor/courses/${courseId}/chapters/${id}`);
+  };
+
   return (
     <div className=" relative mt-6 border bg-[#67ebf71f] rounded-md p-4">
       {isUpdating && (
@@ -152,7 +156,7 @@ export const ChaptersForm = ({ initialData, courseId }: ChaptersFormProps) => {
           <ChaptersList
             items={initialData.chapters || []}
             onReorder={onReorder}
-            onEdit={() => {}}
+            onEdit={onEdit}
           />
         </div>
       )}
