@@ -1,6 +1,7 @@
+import { IconComp } from "@/components/icon-comp";
 import { db } from "@/lib/db";
 import { auth } from "@clerk/nextjs";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, LayoutDashboard } from "lucide-react";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
@@ -50,6 +51,18 @@ const ChapterIdPage = async ({
                 Complete all fields {completionText}
               </span>
             </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-16">
+        <div className="space-y-4">
+          <div>
+            <div className="flex items-center gap-x-2">
+              <IconComp icon={LayoutDashboard} />
+              <h2 className="text-xl">Customize your chapter</h2>
+            </div>
+            {/* TODO : Chapter Title Form */}
           </div>
         </div>
       </div>
