@@ -56,8 +56,8 @@ export const ChapterTitleForm = ({
   // Create the onSubmit function handler to call the API to submit the inputs.
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
     try {
-      await axios.patch(`/api/courses/${courseId}`, data);
-      toast.success("Course updated successfully");
+      await axios.patch(`/api/courses/${courseId}/chapters/${chapterId}`, data);
+      toast.success("Chapter updated successfully");
       toggleEdit();
       router.refresh();
     } catch {
