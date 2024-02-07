@@ -18,10 +18,11 @@ import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
-import { Course } from "@prisma/client";
+import { Chapter, Course } from "@prisma/client";
 
 interface ChapterTitleFormProps {
-  initialData: Course;
+  // initialData: Course & { chapters: Chapter[] };
+  initialData: Chapter;
   courseId: string;
   chapterId: string;
 }

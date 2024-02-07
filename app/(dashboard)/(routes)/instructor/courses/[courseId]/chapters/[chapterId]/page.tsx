@@ -63,7 +63,11 @@ const ChapterIdPage = async ({
               <IconComp icon={LayoutDashboard} />
               <h2 className="text-xl">Customize your chapter</h2>
             </div>
-            <ChapterTitleForm />
+            <ChapterTitleForm
+              initialData={chapter}
+              courseId={params.courseId}
+              chapterId={params.chapterId}
+            />
           </div>
         </div>
       </div>
