@@ -57,7 +57,7 @@ model Attachment {
 model Chapter {
   id String @id @default(uuid())
   title String 
-  descriptions String? @db.Text
+  description String? @db.Text
   videoUrl String? @db.Text
   position Int
   isPublished Boolean @default(false)
