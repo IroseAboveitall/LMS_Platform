@@ -9,6 +9,7 @@ import { Pencil } from "lucide-react";
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormMessage,
@@ -21,6 +22,7 @@ import { cn } from "@/lib/utils";
 import { Chapter } from "@prisma/client";
 import { Editor } from "@/components/editor";
 import { Preview } from "@/components/preview";
+import { Checkbox } from "@/components/ui/checkbox";
 
 interface ChapterAccessFormProps {
   initialData: Chapter;
@@ -113,13 +115,21 @@ export const ChapterAccessForm = ({
           >
             <FormField
               control={form.control}
-              name="description"
+              name="isFree"
               render={({ field }) => (
-                <FormItem>
+                <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md boreder p-4">
                   <FormControl>
-                    <Editor {...field} />
+                    <Checkbox
+                      checked={field.value}
+                      onCheckedChange={field.onChange}
+                    />
                   </FormControl>
-                  <FormMessage />
+                  <div className="space-y-1 leading-none">
+                    <FormDescription>
+                      Check this box if you want to make this chapter free for
+                      preview
+                    </FormDescription>
+                  </div>
                 </FormItem>
               )}
             />
