@@ -1,3 +1,4 @@
+import { ChapterDescriptionForm } from "@/app/(dashboard)/(routes)/instructor/courses/[courseId]/chapters/[chapterId]/_components/chapter-description-form";
 import { ChapterTitleForm } from "@/app/(dashboard)/(routes)/instructor/courses/[courseId]/chapters/[chapterId]/_components/chapter-title-form";
 import { IconComp } from "@/components/icon-comp";
 import { db } from "@/lib/db";
@@ -68,6 +69,7 @@ const ChapterIdPage = async ({
               courseId={params.courseId}
               chapterId={params.chapterId}
             />
+            <ChapterDescriptionForm initialData={chapter} courseId={params.courseId} chapterId={params.chapterId} />
           </div>
         </div>
       </div>

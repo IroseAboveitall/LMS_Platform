@@ -18,12 +18,11 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
-import { Textarea } from "@/components/ui/textarea";
-import { Course } from "@prisma/client";
+import { Chapter } from "@prisma/client";
 import { Editor } from "@/components/editor";
 
 interface ChapterDescriptionFormProps {
-  initialData: Course;
+  initialData: Chapter;
   courseId: string;
   chapterId: string;
 }
