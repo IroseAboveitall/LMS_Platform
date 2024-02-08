@@ -3,7 +3,7 @@ import { ChapterTitleForm } from "@/app/(dashboard)/(routes)/instructor/courses/
 import { IconComp } from "@/components/icon-comp";
 import { db } from "@/lib/db";
 import { auth } from "@clerk/nextjs";
-import { ArrowLeft, LayoutDashboard } from "lucide-react";
+import { ArrowLeft, Eye, LayoutDashboard } from "lucide-react";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
@@ -69,7 +69,18 @@ const ChapterIdPage = async ({
               courseId={params.courseId}
               chapterId={params.chapterId}
             />
-            <ChapterDescriptionForm initialData={chapter} courseId={params.courseId} chapterId={params.chapterId} />
+            <ChapterDescriptionForm
+              initialData={chapter}
+              courseId={params.courseId}
+              chapterId={params.chapterId}
+            />
+          </div>
+
+          <div>
+            <div>
+              <IconComp icon={Eye} />
+              <h2 className="text-xl">Access Settings</h2>
+            </div>
           </div>
         </div>
       </div>
