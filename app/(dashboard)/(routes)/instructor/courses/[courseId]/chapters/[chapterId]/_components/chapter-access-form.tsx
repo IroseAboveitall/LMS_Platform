@@ -29,7 +29,7 @@ interface ChapterAccessFormProps {
 }
 
 const formSchema = z.object({
-  description: z.string().min(1),
+  isFree: z.boolean().default(false),
 });
 
 export const ChapterAccessForm = ({
@@ -47,7 +47,8 @@ export const ChapterAccessForm = ({
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      description: initialData?.description || "",
+      isFree: !!initialData.isFree, // 👈 By putting !! , we make it into a boolean.
+      // OR 👉  isFree:  Boolean(initialData.isFree),
     },
   });
 
