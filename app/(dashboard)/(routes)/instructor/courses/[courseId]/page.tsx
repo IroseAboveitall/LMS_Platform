@@ -127,6 +127,9 @@ const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
 
         {/* 👇 This is the container for Right side of the courseId page for md screens and larger*/}
         <div className="space-y-6">
+
+
+          {/* Container for "Chapters" */}
           <div>
             <div className="flex items-center gap-x-2">
               <IconComp icon={ListChecks} />
@@ -139,7 +142,7 @@ const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
             />
           </div>
 
-          {/* Container for the Price Form */}
+          {/* Container for "Price"  */}
           <div>
             <div className="flex items-center gap-x-2">
               <IconComp icon={CircleDollarSign} />

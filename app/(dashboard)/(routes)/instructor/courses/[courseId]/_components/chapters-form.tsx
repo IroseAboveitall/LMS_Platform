@@ -83,11 +83,13 @@ export const ChaptersForm = ({ initialData, courseId }: ChaptersFormProps) => {
 
   return (
     <div className=" relative mt-6 border bg-[#67ebf71f] rounded-md p-4">
+      {/* 👇 When chapters are in reordering state do not let users do anything but show a loader icon*/}
       {isUpdating && (
         <div className="absolute h-full w-full bg-slate-500/20 top-0 right-0 rounded-md flex items-center justify-center">
           <Loader2 className="animate-spin h-6 w-6 text-sky-700 " />
         </div>
       )}
+
       {/* 👇 Container for the "Course Title" & the Button */}
       <div className="font-medium flex items-center justify-between">
         Course chapters
@@ -96,7 +98,6 @@ export const ChaptersForm = ({ initialData, courseId }: ChaptersFormProps) => {
           variant="ghost"
           className="hover:bg-slate-300 flex justify-center mr-2"
         >
-          {/* 👇 Using Ternary operator instead ( This is just another way of conditional rendering ) */}
           {isCreating ? (
             <>Cancel</>
           ) : (
@@ -142,6 +143,8 @@ export const ChaptersForm = ({ initialData, courseId }: ChaptersFormProps) => {
           </form>
         </Form>
       )}
+
+      {/* 👇 Display the list of Chapters if user has not clicked the "Add a Chapter" Button */}
       {!isCreating && (
         <div
           className={cn(
@@ -149,17 +152,19 @@ export const ChaptersForm = ({ initialData, courseId }: ChaptersFormProps) => {
             !initialData.chapters.length && "text-slate-500 italic"
           )}
         >
-          {/* 👇 If there are NO chapters : Display "No chapters" */}
+          {/*  If there are NO chapters : Display "No chapters" */}
           {!initialData.chapters.length && "No chapters"}
 
-          {/* 👇 If there are chapters : List out the only chapter or all the chapters */}
+          {/*  If there are chapters : List out the only chapter or all the chapters */}
           <ChaptersList
             items={initialData.chapters || []}
-            onReorder={onReorder}
+            onReorder={onReorder}  // 👈 Pass the onReorder function handle definition as a prop 
             onEdit={onEdit}
           />
         </div>
       )}
+
+      {/* 👇 Display a text to suggest that the user can drag to reorder the chapters */}
       {!isCreating && (
         <p className="text-xs text-muted-foreground mt-4">
           Drag to reorder chapters
