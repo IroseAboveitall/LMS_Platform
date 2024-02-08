@@ -15,4 +15,10 @@ export const Editor = ({ onChange, value }: EditorProps) => {
     []
   );
   // https://chat.openai.com/share/d2f7c222-0c6d-4fda-9878-065383b4227d
+
+  return (
+    <div className="bg-white">
+      <ReactQuill theme="snow" value={value} onChange={onChange} />
+    </div>
+  );
 };
