@@ -1,3 +1,4 @@
+import { ChapterAccessForm } from "@/app/(dashboard)/(routes)/instructor/courses/[courseId]/chapters/[chapterId]/_components/chapter-access-form";
 import { ChapterDescriptionForm } from "@/app/(dashboard)/(routes)/instructor/courses/[courseId]/chapters/[chapterId]/_components/chapter-description-form";
 import { ChapterTitleForm } from "@/app/(dashboard)/(routes)/instructor/courses/[courseId]/chapters/[chapterId]/_components/chapter-title-form";
 import { IconComp } from "@/components/icon-comp";
@@ -77,10 +78,15 @@ const ChapterIdPage = async ({
           </div>
 
           <div>
-            <div>
+            <div className="flex items-center gap-x-2">
               <IconComp icon={Eye} />
               <h2 className="text-xl">Access Settings</h2>
             </div>
+            <ChapterAccessForm
+              initialData={chapter}
+              courseId={params.courseId}
+              chapterId={params.chapterId}
+            />
           </div>
         </div>
       </div>
