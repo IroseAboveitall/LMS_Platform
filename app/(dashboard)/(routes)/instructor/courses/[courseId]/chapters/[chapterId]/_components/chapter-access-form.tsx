@@ -73,7 +73,7 @@ export const ChapterAccessForm = ({
     <div className="mt-6 border bg-[#67ebf71f] rounded-md p-4">
       {/* 👇 Container for the "Course Title" & the Button */}
       <div className="font-medium flex items-center justify-between">
-        Chapter Description
+        Chapter access
         <Button
           onClick={toggleEdit}
           variant="ghost"
@@ -85,7 +85,7 @@ export const ChapterAccessForm = ({
           ) : (
             <>
               <Pencil className="h-4 w-4 mr-2" />
-              Edit Description
+              Edit access
             </>
           )}
         </Button>
@@ -93,17 +93,18 @@ export const ChapterAccessForm = ({
 
       {/* 👇 Display the current Chapter Description if user has not clicked the "Edit Description" Button */}
       {!isEditing && (
-        <div
+        <p
           className={cn(
             "text-sm mt-2",
-            !initialData.description && "text-slate-500 italic"
+            !initialData.isFree && "text-slate-500 italic"
           )}
         >
-          {!initialData.description && "No description"}
-          {initialData.description && (
-            <Preview value={initialData.description} />
+          {initialData.isFree ? (
+            <>This chapter is free for Preview</>
+          ): (
+            <>This chapter is not free</>
           )}
-        </div>
+        </p>
       )}
 
       {/* 👇 Display the form if user has clicked the "Edit Description" Button */}
