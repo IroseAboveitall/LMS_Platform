@@ -12,7 +12,7 @@ import { Course } from "@prisma/client";
 import Image from "next/image";
 import { FileUpload } from "@/components/file-upload";
 
-interface ImageFormProps {
+interface ChapterVideoProps {
   initialData: Course;
   courseId: string;
 }
@@ -23,7 +23,7 @@ const formSchema = z.object({
   }),
 });
 
-export const ImageForm = ({ initialData, courseId }: ImageFormProps) => {
+export const ChapterVideo = ({ initialData, courseId }: ChapterVideoProps) => {
   const [isEditing, setIsEditing] = useState(false);
 
   const toggleEdit = () => setIsEditing((current) => !current);
