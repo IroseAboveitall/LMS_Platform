@@ -26,7 +26,7 @@ const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
     return redirect("/"); // Redirect back to the Root Page i.e. the Home Page
   }
 
-  // Fetch the course along with the attachments and the chapters
+  // Fetch the course along with the attachments and the chapters associated with this course
   const course = await db.course.findUnique({
     where: { id: params.courseId, userId },
     include: {
