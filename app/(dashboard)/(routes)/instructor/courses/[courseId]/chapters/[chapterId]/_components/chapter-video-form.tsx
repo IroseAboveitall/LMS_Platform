@@ -2,28 +2,31 @@
 
 import * as z from "zod";
 import axios from "axios";
-import { ImageIcon, Pencil, PlusCircle } from "lucide-react";
+import { Pencil, PlusCircle, Video } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
-import { Course } from "@prisma/client";
+import { Chapter, MuxData } from "@prisma/client";
 import Image from "next/image";
 import { FileUpload } from "@/components/file-upload";
 
 interface ChapterVideoProps {
-  initialData: Course;
+  initialData: Chapter & { muxData?: MuxData | null };
   courseId: string;
+  chapterId: string;
 }
 
 const formSchema = z.object({
-  imageUrl: z.string().min(1, {
-    message: "Image cannot be empty",
-  }),
+  videoUrl: z.string().min(1),
 });
 
-export const ChapterVideo = ({ initialData, courseId }: ChapterVideoProps) => {
+export const ChapterVideo = ({
+  initialData,
+  courseId,
+  chapterId,
+}: ChapterVideoProps) => {
   const [isEditing, setIsEditing] = useState(false);
 
   const toggleEdit = () => setIsEditing((current) => !current);
@@ -33,8 +36,8 @@ export const ChapterVideo = ({ initialData, courseId }: ChapterVideoProps) => {
   // Create the onSubmit function handler to call the API to submit the inputs.
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
     try {
-      await axios.patch(`/api/courses/${courseId}`, data);
-      toast.success("Course updated successfully");
+      await axios.patch(`/api/courses/${courseId}/chapters/${chapterId}`, data);
+      toast.success("Chapter updated successfully");
       toggleEdit();
       router.refresh();
     } catch {
@@ -53,16 +56,16 @@ export const ChapterVideo = ({ initialData, courseId }: ChapterVideoProps) => {
           className="hover:bg-slate-300 flex justify-center mr-2"
         >
           {isEditing && <>Cancel</>}
-          {!isEditing && !initialData.imageUrl && (
+          {!isEditing && !initialData.videoUrl && (
             <>
               <PlusCircle className="h-4 w-4 mr-2" />
-              Add an image
+              Add a video
             </>
           )}
-          {!isEditing && initialData.imageUrl && (
+          {!isEditing && initialData.videoUrl && (
             <>
               <Pencil className="h-4 w-4 mr-2" />
-              Change image
+              Edit video
             </>
           )}
         </Button>
@@ -70,18 +73,14 @@ export const ChapterVideo = ({ initialData, courseId }: ChapterVideoProps) => {
 
       {/* 👇 Display the current Course Image if user has not clicked the "Change Image" Button */}
       {!isEditing &&
-        (!initialData.imageUrl ? (
+        (!initialData.videoUrl ? (
           <div className="mt-4 flex items-center justify-center h-60 bg-slate-200 rounded-md">
-            <ImageIcon className="h-10 w-10 text-slate-500" />
+            <Video className="h-10 w-10 text-slate-500" />
           </div>
         ) : (
           <div className="relative aspect-video mt-2">
-            <Image
-              alt="Upload"
-              fill
-              className="object-cover rounded-md"
-              src={initialData.imageUrl}
-            />
+            Video uploaded!
+            {/* TODO : Actual Video Player */}
           </div>
         ))}
 
@@ -92,13 +91,20 @@ export const ChapterVideo = ({ initialData, courseId }: ChapterVideoProps) => {
             endpoint="courseImage"
             onChange={(url) => {
               if (url) {
-                onSubmit({ imageUrl: url });
+                onSubmit({ videoUrl: url });
               }
             }}
           />
           <div className="text-xs text-muted-foreground mt-4">
-            16:9 aspect ratio recommended
+            Upload this Chapter's Video
           </div>
+        </div>
+      )}
+      {/* 👇 Show a message to the user who is editing */}
+      {initialData.videoUrl && !isEditing && (
+        <div className="text-xs text-muted-foreground mt-2">
+          Video's can take a few minutes to process. Refresh the page if the
+          video doesn't appear.
         </div>
       )}
     </div>
