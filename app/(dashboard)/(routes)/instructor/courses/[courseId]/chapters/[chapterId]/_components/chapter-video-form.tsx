@@ -47,9 +47,9 @@ export const ChapterVideoForm = ({
 
   return (
     <div className="mt-6 border bg-[#67ebf71f] rounded-md p-4">
-      {/* 👇 Container for the "Course Image" & the Button */}
+      {/* 👇 Container for the "Chapter Video" & the Button */}
       <div className="font-medium flex items-center justify-between">
-        Course image
+        Chapter video
         <Button
           onClick={toggleEdit}
           variant="ghost"
@@ -71,7 +71,7 @@ export const ChapterVideoForm = ({
         </Button>
       </div>
 
-      {/* 👇 Display the current Course Image if user has not clicked the "Change Image" Button */}
+      {/* 👇 Display the current Course Video if user has not clicked the "Change Image" Button */}
       {!isEditing &&
         (!initialData.videoUrl ? (
           <div className="mt-4 flex items-center justify-center h-60 bg-slate-200 rounded-md">
@@ -84,11 +84,11 @@ export const ChapterVideoForm = ({
           </div>
         ))}
 
-      {/* 👇 Display the form if user has clicked the "Edit Description" Button */}
+      {/* 👇 Display the Video Upload from UploadThing if user has clicked the "Edit Video/Add a video" Button */}
       {isEditing && (
         <div>
           <FileUpload
-            endpoint="courseImage"
+            endpoint="chapterVideo"
             onChange={(url) => {
               if (url) {
                 onSubmit({ videoUrl: url });
