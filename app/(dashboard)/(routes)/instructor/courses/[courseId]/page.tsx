@@ -86,11 +86,10 @@ const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
 
   return (
     <div className="p-6">
-      {/* 👇 Title */}
+      {/* This is the container to center its only child which is the container div below*/}
       <div className="flex items-center justify-between">
-        {/* 👈 This is the container to center its only child which is the container div below*/}
+        {/* This is the container for h1 & span*/}
         <div className="flex flex-col gap-y-2">
-          {/* 👈 This is the container for h1 & span*/}
           <h1 className="text-2xl font-medium">Course Setup</h1>
           <span className="text-sm text-slate-700">
             Complete all fields {completionText}
@@ -98,8 +97,9 @@ const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
         </div>
       </div>
 
-      {/* 👇 */}
+      {/* 👇 Grid : Contents of the Individual Course*/}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-16">
+
         {/* 👇 This is the container for the left side of the courseId page for md screens and larger */}
         <div>
           <div className="flex items-center gap-x-2">
@@ -107,12 +107,7 @@ const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
             <h2 className="text-xl">Customize your course</h2>
           </div>
           <TitleForm initialData={course} courseId={course.id} />
-          {/* <DescriptionForm initialData={course} courseId={course.id} /> */}
-          <DescriptionForm
-            // initialData={{ ...course, description: course.description! }}
-            initialData={course}
-            courseId={course.id}
-          />
+          <DescriptionForm initialData={course} courseId={course.id} />
           <ImageForm initialData={course} courseId={course.id} />
           <CategoryForm
             initialData={course}
@@ -127,8 +122,6 @@ const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
 
         {/* 👇 This is the container for Right side of the courseId page for md screens and larger*/}
         <div className="space-y-6">
-
-
           {/* Container for "Chapters" */}
           <div>
             <div className="flex items-center gap-x-2">
@@ -160,6 +153,7 @@ const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
             <AttachmentForm initialData={course} courseId={course.id} />
           </div>
         </div>
+      
       </div>
     </div>
   );
