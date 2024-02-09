@@ -1,6 +1,7 @@
 import { ChapterAccessForm } from "@/app/(dashboard)/(routes)/instructor/courses/[courseId]/chapters/[chapterId]/_components/chapter-access-form";
 import { ChapterDescriptionForm } from "@/app/(dashboard)/(routes)/instructor/courses/[courseId]/chapters/[chapterId]/_components/chapter-description-form";
 import { ChapterTitleForm } from "@/app/(dashboard)/(routes)/instructor/courses/[courseId]/chapters/[chapterId]/_components/chapter-title-form";
+import { ChapterVideoForm } from "@/app/(dashboard)/(routes)/instructor/courses/[courseId]/chapters/[chapterId]/_components/chapter-video-form";
 import { IconComp } from "@/components/icon-comp";
 import { db } from "@/lib/db";
 import { auth } from "@clerk/nextjs";
@@ -94,6 +95,11 @@ const ChapterIdPage = async ({
             <IconComp icon={Video} />
             <h2 className="text-xl">Add a Video</h2>
           </div>
+          <ChapterVideoForm
+            initialData={chapter}
+            courseId={params.courseId}
+            chapterId={params.chapterId}
+          />
         </div>
       </div>
     </div>
