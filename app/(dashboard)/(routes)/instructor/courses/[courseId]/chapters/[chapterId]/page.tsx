@@ -38,6 +38,9 @@ const ChapterIdPage = async ({
 
   const completionText = `(${completedFields}/${totalFields})`;
 
+  const isComplete = requiredFields.every(Boolean);
+  // https://chat.openai.com/share/ad2eaa0d-cae8-4573-bfa2-7fc95790daf9
+
   return (
     <>
       {/* 👇 Display the Banner when the Chapter is not published */}
