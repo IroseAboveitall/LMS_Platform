@@ -1,4 +1,5 @@
 import { ChapterAccessForm } from "@/app/(dashboard)/(routes)/instructor/courses/[courseId]/chapters/[chapterId]/_components/chapter-access-form";
+import { ChapterActions } from "@/app/(dashboard)/(routes)/instructor/courses/[courseId]/chapters/[chapterId]/_components/chapter-actions";
 import { ChapterDescriptionForm } from "@/app/(dashboard)/(routes)/instructor/courses/[courseId]/chapters/[chapterId]/_components/chapter-description-form";
 import { ChapterTitleForm } from "@/app/(dashboard)/(routes)/instructor/courses/[courseId]/chapters/[chapterId]/_components/chapter-title-form";
 import { ChapterVideoForm } from "@/app/(dashboard)/(routes)/instructor/courses/[courseId]/chapters/[chapterId]/_components/chapter-video-form";
@@ -67,6 +68,12 @@ const ChapterIdPage = async ({
                   Complete all fields {completionText}
                 </span>
               </div>
+              <ChapterActions
+                disabled={!isComplete}
+                courseId={params.courseId}
+                chapterId={params.chapterId}
+                isPublished={chapter.isPublished}
+              />
             </div>
           </div>
         </div>
