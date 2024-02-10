@@ -1,4 +1,4 @@
-import { cva } from "class-variance-authority";
+import { VariantProps, cva } from "class-variance-authority";
 
 const bannerVariants = cva(
   "border text-center p-4 text-sm flex items-center w-full",
@@ -15,6 +15,9 @@ const bannerVariants = cva(
   }
 );
 
-export const Banner = () => {
+interface BannerProps extends VariantProps<typeof bannerVariants> {
+  label: string;
+}
+export const Banner = ({ label, variant }: BannerProps) => {
   return <div>Banner</div>;
 };
