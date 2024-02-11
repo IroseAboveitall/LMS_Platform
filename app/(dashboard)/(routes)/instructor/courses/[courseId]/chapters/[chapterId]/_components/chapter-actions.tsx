@@ -3,7 +3,7 @@
 import { ConfirmModal } from "@/components/modals/confirm-modal";
 import { Button } from "@/components/ui/button";
 import axios from "axios";
-import { Trash, TrashIcon } from "lucide-react";
+import { Trash } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import toast from "react-hot-toast";
@@ -29,8 +29,8 @@ export const ChapterActions = ({
       setIsLoading(true);
       await axios.delete(`/api/courses/${courseId}/chapters/${chapterId}`);
       toast.success("Chapter deleted successfully");
-      router.refresh();
       router.push(`/instructor/courses/${courseId}`);
+      router.refresh();
     } catch {
       toast.error("Something went wrong");
     } finally {
