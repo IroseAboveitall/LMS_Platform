@@ -27,7 +27,7 @@ export const ChapterActions = ({
   const onDelete = async () => {
     try {
       setIsLoading(true);
-      await axios.delete(`/api/courses/${courseId}/chapter/${chapterId}`);
+      await axios.delete(`/api/courses/${courseId}/chapters/${chapterId}`);
       toast.success("Chapter deleted successfully");
       router.refresh();
       router.push(`/instructor/courses/${courseId}`);
