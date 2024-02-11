@@ -57,7 +57,7 @@ export async function DELETE(
     }
 
     const deletedChapter = await db.chapter.delete({
-      where: { id: params.chapterId, courseId: params.courseId },
+      where: { id: params.chapterId },
     });
 
     // After the chapter is deleted, is there still a chapter in this course that is published? If there isn't, i.e. this chapter which was deleted was published, that means that we are going to have to unpublish the entire course
