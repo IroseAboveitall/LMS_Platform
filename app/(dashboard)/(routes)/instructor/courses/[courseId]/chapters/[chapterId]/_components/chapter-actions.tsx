@@ -41,14 +41,14 @@ export const ChapterActions = ({
     <div className="flex items-center gap-x-2">
       <Button
         onClick={() => {}}
-        disabled={disabled}
+        disabled={disabled || isLoading}
         variant="outline"
         size="sm"
       >
         {isPublished ? "Unpublish" : "Publish"}
       </Button>
-      <ConfirmModal onConfirm={() => {}}>
-        <Button size="sm">
+      <ConfirmModal onConfirm={onDelete}>
+        <Button size="sm" disabled={isLoading}>
           <Trash className="h-4 w-4" />
         </Button>
       </ConfirmModal>
