@@ -71,14 +71,18 @@ const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
     course.title,
     course.description,
     course.imageUrl,
-    course.price,
     course.categoryId,
+    course.price,
     course.chapters.some((chapter) => chapter.isPublished),
     // 👆 At least one element in the array of course.chapters satisfies the condition that the chapter is published
+    // i.e. At least one chapter of all the chapters in this course is published
+    // https://chat.openai.com/share/ae00692b-ec88-4db2-830b-e1c0d91bf0611
   ];
 
   const totalFields = requiredFields.length;
   const completedFields = requiredFields.filter(Boolean).length;
+  // 👆 This line filters out any falsy values from the requiredFields array and then calculates the length of the resulting array.
+  // https://chat.openai.com/share/3fb16d79-7d1e-4158-99c5-c26fd535b7b7
 
   const completionText = `(${completedFields}/${totalFields})`;
 
@@ -99,7 +103,6 @@ const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
 
       {/* 👇 Grid : Contents of the Individual Course*/}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-16">
-
         {/* 👇 This is the container for the left side of the courseId page for md screens and larger */}
         <div>
           <div className="flex items-center gap-x-2">
@@ -153,7 +156,6 @@ const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
             <AttachmentForm initialData={course} courseId={course.id} />
           </div>
         </div>
-      
       </div>
     </div>
   );

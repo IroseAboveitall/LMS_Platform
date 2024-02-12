@@ -2,6 +2,7 @@ import { db } from "@/lib/db";
 import { auth } from "@clerk/nextjs";
 import { NextResponse } from "next/server";
 
+// ⭐⭐⭐ API to EDIT the course ⭐⭐⭐
 export async function PATCH(
   req: Request,
   { params }: { params: { courseId: string } } // This should be the 2nd parameter

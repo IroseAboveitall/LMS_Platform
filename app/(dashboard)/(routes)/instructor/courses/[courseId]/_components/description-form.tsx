@@ -67,7 +67,7 @@ export const DescriptionForm = ({
 
   return (
     <div className="mt-6 border bg-[#67ebf71f] rounded-md p-4">
-      {/* 👇 Container for the "Course Title" & the Button */}
+      {/* 👇 Container for "Course Description" Heading & the Button */}
       <div className="font-medium flex items-center justify-between">
         Course Description
         <Button

@@ -63,7 +63,7 @@ export const TitleForm = ({ initialData, courseId }: TitleFormProps) => {
 
   return (
     <div className="mt-6 border bg-[#67ebf71f] rounded-md p-4">
-      {/* 👇 Container for the "Course Title" & the Button */}
+      {/* 👇 Container for "Course Title" Heading & the Button */}
       <div className="font-medium flex items-center justify-between">
         Course title
         <Button
