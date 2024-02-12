@@ -5,6 +5,7 @@ import { DescriptionForm } from "@/app/(dashboard)/(routes)/instructor/courses/[
 import { ImageForm } from "@/app/(dashboard)/(routes)/instructor/courses/[courseId]/_components/image-form";
 import { PriceForm } from "@/app/(dashboard)/(routes)/instructor/courses/[courseId]/_components/price-form";
 import { TitleForm } from "@/app/(dashboard)/(routes)/instructor/courses/[courseId]/_components/title-form";
+import { Banner } from "@/components/banner";
 import { IconComp } from "@/components/icon-comp";
 import { db } from "@/lib/db";
 import { auth } from "@clerk/nextjs";
@@ -87,80 +88,89 @@ const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
   const completionText = `(${completedFields}/${totalFields})`;
 
   const isComplete = requiredFields.every(Boolean);
-  // https://chat.openai.com/share/ad2eaa0d-cae8-4573-bfa2-7fc95790daf9
+  // https://chat.openai.com/share/ad2eaa0d-cae8-4573-bfa2-7fc95790daf9g
 
   // TODO : Check that the person who is trying to edit this course is also the creator of this course
 
   return (
-    <div className="p-6">
-      {/* This is the container to center its only child which is the container div below*/}
-      <div className="flex items-center justify-between">
-        {/* This is the container for h1 & span*/}
-        <div className="flex flex-col gap-y-2">
-          <h1 className="text-2xl font-medium">Course Setup</h1>
-          <span className="text-sm text-slate-700">
-            Complete all fields {completionText}
-          </span>
-        </div>
-      </div>
-
-      {/* 👇 Grid : Contents of the Individual Course*/}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-16">
-        {/* 👇 This is the container for the left side of the courseId page for md screens and larger */}
-        <div>
-          <div className="flex items-center gap-x-2">
-            <IconComp icon={LayoutDashboard} />
-            <h2 className="text-xl">Customize your course</h2>
+    <>
+      {/* 👇 Display the Banner when the Course is not published */}
+      {!course.isPublished && (
+        <Banner
+          label="This course is unpublished. It will not be visible to the students."
+          variant="warning"
+        />
+      )}
+      <div className="p-6">
+        {/* This is the container to center its only child which is the container div below*/}
+        <div className="flex items-center justify-between">
+          {/* This is the container for h1 & span*/}
+          <div className="flex flex-col gap-y-2">
+            <h1 className="text-2xl font-medium">Course Setup</h1>
+            <span className="text-sm text-slate-700">
+              Complete all fields {completionText}
+            </span>
           </div>
-          <TitleForm initialData={course} courseId={course.id} />
-          <DescriptionForm initialData={course} courseId={course.id} />
-          <ImageForm initialData={course} courseId={course.id} />
-          <CategoryForm
-            initialData={course}
-            courseId={course.id}
-            // options={categories.map((category) => ({
-            //   label: category.name,
-            //   value: category.id,
-            // }))}
-            options={modifiedCategories}
-          />
         </div>
 
-        {/* 👇 This is the container for Right side of the courseId page for md screens and larger*/}
-        <div className="space-y-6">
-          {/* Container for "Chapters" */}
+        {/* 👇 Grid : Contents of the Individual Course*/}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-16">
+          {/* 👇 This is the container for the left side of the courseId page for md screens and larger */}
           <div>
             <div className="flex items-center gap-x-2">
-              <IconComp icon={ListChecks} />
-              <h2 className="text-xl">Course Chapters</h2>
+              <IconComp icon={LayoutDashboard} />
+              <h2 className="text-xl">Customize your course</h2>
             </div>
-            <ChaptersForm
-              // initialData={{ ...course, description: course.description! }}
+            <TitleForm initialData={course} courseId={course.id} />
+            <DescriptionForm initialData={course} courseId={course.id} />
+            <ImageForm initialData={course} courseId={course.id} />
+            <CategoryForm
               initialData={course}
               courseId={course.id}
+              // options={categories.map((category) => ({
+              //   label: category.name,
+              //   value: category.id,
+              // }))}
+              options={modifiedCategories}
             />
           </div>
 
-          {/* Container for "Price"  */}
-          <div>
-            <div className="flex items-center gap-x-2">
-              <IconComp icon={CircleDollarSign} />
-              <h2 className="text-xl">Offer your Course at a Price</h2>
+          {/* 👇 This is the container for Right side of the courseId page for md screens and larger*/}
+          <div className="space-y-6">
+            {/* Container for "Chapters" */}
+            <div>
+              <div className="flex items-center gap-x-2">
+                <IconComp icon={ListChecks} />
+                <h2 className="text-xl">Course Chapters</h2>
+              </div>
+              <ChaptersForm
+                // initialData={{ ...course, description: course.description! }}
+                initialData={course}
+                courseId={course.id}
+              />
             </div>
-            <PriceForm initialData={course} courseId={course.id} />
-          </div>
 
-          {/* Container for the Attachment Form */}
-          <div>
-            <div className="flex items-center gap-x-2">
-              <IconComp icon={File} />
-              <h2 className="text-xl">Resources for the course</h2>
+            {/* Container for "Price"  */}
+            <div>
+              <div className="flex items-center gap-x-2">
+                <IconComp icon={CircleDollarSign} />
+                <h2 className="text-xl">Offer your Course at a Price</h2>
+              </div>
+              <PriceForm initialData={course} courseId={course.id} />
             </div>
-            <AttachmentForm initialData={course} courseId={course.id} />
+
+            {/* Container for the Attachment Form */}
+            <div>
+              <div className="flex items-center gap-x-2">
+                <IconComp icon={File} />
+                <h2 className="text-xl">Resources for the course</h2>
+              </div>
+              <AttachmentForm initialData={course} courseId={course.id} />
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
