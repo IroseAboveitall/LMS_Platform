@@ -86,6 +86,9 @@ const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
 
   const completionText = `(${completedFields}/${totalFields})`;
 
+  const isComplete = requiredFields.every(Boolean);
+  // https://chat.openai.com/share/ad2eaa0d-cae8-4573-bfa2-7fc95790daf9
+
   // TODO : Check that the person who is trying to edit this course is also the creator of this course
 
   return (
